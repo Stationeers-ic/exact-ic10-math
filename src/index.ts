@@ -50,3 +50,4 @@ export function not(x: number): null | number {
 	if (vL == null) return null
 	return LongToDouble(~vL)
 }
+export { GetVariableInt, GetVariableLong, LongToDouble, DoubleToLong } from "./functions"

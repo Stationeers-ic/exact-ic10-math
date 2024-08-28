@@ -2,14 +2,22 @@
   "author": "Aidan647",
   "name": "stationeers-bitwise-functions",
   "description": "Bitwise Operations in TypeScript (JavaScript) for Stationeers",
-  "private": true,
   "version": "1.0.0",
   "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "format": "prettier . --write",
     "watch": "bun test --watch",
-    "test": "bun test"
+    "test": "bun test",
+    "build": "tsc",
+    "minify": "uglifyjs dist/functions.js --compress toplevel --mangle -o dist/functions.js && uglifyjs dist/index.js --compress toplevel --mangle -o dist/index.js",
+    "prepack": "bun test && tsc && bun minify"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Stationeers-ic/stationeers-bitwise-functions.git"
@@ -17,7 +25,8 @@
   "keywords": [
     "typescript",
     "bitwise-operators",
-    "csharp"
+    "csharp",
+    "stationeers"
   ],
   "license": "MIT",
   "bugs": {
@@ -27,6 +36,7 @@
   "devDependencies": {
     "@types/bun": "^1.1.0",
     "prettier": "^3.2.5",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "uglify-js": "^3.19.2"
   }
 }

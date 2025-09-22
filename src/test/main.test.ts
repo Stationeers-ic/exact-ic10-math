@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { and, nor, not, or, sla, sll, sra, srl, xor } from "../index"
+import { and, nor, not, or, sla, sll, sra, srl, xor, ext, ins } from "../index"
 import { DoubleToLong, GetVariableInt, GetVariableLong, LongToDouble } from "../functions"
 
 describe("functions", () => {
@@ -155,5 +155,39 @@ describe("arithmetic", () => {
 		expect(not(0xf0fff0fffff)).toBe(-0xf0fff100000)
 		expect(not(-9223372036854777000)).toBe(null)
 		expect(not(9223372036854777000)).toBe(null)
+	})
+
+	test("ext", () => {
+		expect(ext(11, 1, 2)).toBe(1)
+		expect(ext(11, 0, 3)).toBe(3)
+		expect(ext(45, 2, 3)).toBe(3)
+		expect(ext(1, 0, 53)).toBe(1)
+		expect(ext(-1, 0, 4)).toBe(15)
+		expect(ext(-1, 0, 53)).toBe(0x1fffffffffffff)
+		expect(ext(0x1fffffffffffff, 0, 53)).toBe(0x1fffffffffffff)
+		expect(ext(1, 0, 0)).toBe(null)
+		expect(ext(1, -1, 1)).toBe(null)
+		expect(ext(1, 53, 1)).toBe(null)
+		expect(ext(1, 1, 53)).toBe(null)
+		expect(ext(9223372036854777000, 1, 1)).toBe(null)
+		expect(ext(1, 0, 54)).toBe(null)
+	})
+
+	test("ins", () => {
+		expect(ins(0, 0, 1, 1)).toBe(1)
+		expect(ins(0, 1, 2, 3)).toBe(6)
+		expect(ins(11, 1, 2, 0)).toBe(9)
+		expect(ins(11, 1, 2, 3)).toBe(15)
+		expect(ins(0, 50, 3, 5)).toBe(5 * 2 ** 50)
+		expect(ins(0, 0, 3, 15)).toBe(7)
+		expect(ins(0, 0, 53, -1)).toBe(0x1fffffffffffff)
+		expect(ins(240, 2, 3, 0)).toBe(224)
+		expect(ins(1, 0, 0, 1)).toBe(null)
+		expect(ins(1, -1, 1, 1)).toBe(null)
+		expect(ins(1, 53, 1, 1)).toBe(null)
+		expect(ins(1, 1, 53, 1)).toBe(null)
+		expect(ins(9223372036854777000, 1, 1, 1)).toBe(2050)
+		expect(ins(1, 1, 1, 9223372036854777000)).toBe(null)
+		expect(ins(1, 0, 54, 1)).toBe(null)
 	})
 })

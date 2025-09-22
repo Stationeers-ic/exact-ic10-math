@@ -34,9 +34,9 @@
   },
   "homepage": "https://github.com/Stationeers-ic/stationeers-bitwise-functions#readme",
   "devDependencies": {
-    "@types/bun": "^1.1.0",
-    "prettier": "^3.2.5",
-    "typescript": "^5.4.5",
-    "uglify-js": "^3.19.2"
+    "@types/bun": "^1.2.22",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "uglify-js": "^3.19.3"
   }
 }

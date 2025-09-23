@@ -1,7 +1,7 @@
 {
   "author": "Aidan647",
-  "name": "stationeers-bitwise-functions",
-  "description": "Bitwise Operations in TypeScript (JavaScript) for Stationeers",
+  "name": "exact-ic10-math",
+  "description": "A library that faithfully implements IC10 math, bitwise, and logic instructions with exact behavior.",
   "version": "1.1.0",
   "type": "module",
   "main": "dist/index.js",
@@ -12,31 +12,34 @@
     "watch": "bun test --watch",
     "test": "bun test",
     "build": "tsc",
-    "minify": "uglifyjs dist/functions.js --compress toplevel --mangle -o dist/functions.js && uglifyjs dist/index.js --compress toplevel --mangle -o dist/index.js",
-    "prepack": "bun test && tsc && bun minify"
+    "prepack": "bun test && tsc"
   },
   "files": [
     "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Stationeers-ic/stationeers-bitwise-functions.git"
+    "url": "git+https://github.com/Stationeers-ic/exact-ic10-math.git"
   },
   "keywords": [
     "typescript",
-    "bitwise-operators",
-    "csharp",
-    "stationeers"
+    "ic10",
+    "math",
+    "assembly",
+    "bitwise",
+    "logic",
+    "stationeers",
+    "emulator",
+    "exact"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Stationeers-ic/stationeers-bitwise-functions/issues"
+    "url": "https://github.com/Stationeers-ic/exact-ic10-math/issues"
   },
-  "homepage": "https://github.com/Stationeers-ic/stationeers-bitwise-functions#readme",
+  "homepage": "https://github.com/Stationeers-ic/exact-ic10-math#readme",
   "devDependencies": {
     "@types/bun": "^1.2.22",
     "prettier": "^3.6.2",
-    "typescript": "^5.9.2",
-    "uglify-js": "^3.19.3"
+    "typescript": "^5.9.2"
   }
 }

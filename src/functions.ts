@@ -3,7 +3,7 @@ const highBitFlag = 0x20000000000000n // Value: 9007199254740992
 
 export function GetVariableLong(x: number | bigint, signed = true): bigint | null {
 	if (typeof x === "number") {
-		if (isNaN(x)) x = 0
+		if (isNaN(x)) return 0n
 		else if (!Number.isFinite(x)) return null
 		else if (!Number.isInteger(x)) x = Math.trunc(x)
 	}
@@ -15,7 +15,7 @@ export function GetVariableLong(x: number | bigint, signed = true): bigint | nul
 }
 export function GetVariableInt(x: number | bigint): bigint | null {
 	if (typeof x === "number") {
-		if (isNaN(x)) x = 0
+		if (isNaN(x)) return 0n
 		else if (!Number.isFinite(x)) return null
 		else if (!Number.isInteger(x)) x = Math.trunc(x)
 	}

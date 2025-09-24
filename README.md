@@ -39,7 +39,7 @@ console.log(or(0b1100, 0b0110)) // 14
 console.log(ext(0b1011, 1, 2)) // 1
 
 // insert bits: (value, insertValue, start, length)
-console.log(ins(9223372036854777000, 1, 1, 1)) // wraps like in-game
+console.log(ins(9223372036854776000, 1, 1, 1)) // wraps like in-game
 ```
 
 Default import (single object):

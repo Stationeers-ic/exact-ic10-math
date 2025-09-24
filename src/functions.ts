@@ -2,6 +2,11 @@
 const highBitFlag = 0x20000000000000n // Value: 9007199254740992
 
 export function GetVariableLong(x: number | bigint, signed = true): bigint | null {
+	if (typeof x === "number") {
+		if (isNaN(x)) return null
+		if (!Number.isFinite(x)) return null
+		if (!Number.isInteger(x)) x = Math.trunc(x)
+	}
 	const value = BigInt(x)
 	// Check if the value is within the range for 64-bit integers.
 	// If it's out of this range, return null.
@@ -9,6 +14,11 @@ export function GetVariableLong(x: number | bigint, signed = true): bigint | nul
 	return DoubleToLong(value, signed)
 }
 export function GetVariableInt(x: number | bigint): bigint | null {
+	if (typeof x === "number") {
+		if (isNaN(x)) return null
+		if (!Number.isFinite(x)) return null
+		if (!Number.isInteger(x)) x = Math.trunc(x)
+	}
 	const value = BigInt(x)
 	// Check if the value is within the valid range for a 32-bit signed integer.
 	// If the value is smaller than -2147483648 or larger than 2147483647, return null.

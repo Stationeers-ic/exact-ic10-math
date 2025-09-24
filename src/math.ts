@@ -167,3 +167,18 @@ export function max(a: number, b: number): number {
 export function lerp(a: number, b: number, t: number): number {
 	return a + (b - a) * min(max(t, 0), 1)
 }
+
+/**
+ * Register = provided num or register value.
+ *
+ * @example
+ * ```ts
+ * const r = move(a)
+ * ```
+ * @remarks In-game: move r? a(r?|num)
+ *
+ * Note: this function simply returns the input value unchanged.
+ */
+export function move<T>(a: T): T {
+	return a
+}

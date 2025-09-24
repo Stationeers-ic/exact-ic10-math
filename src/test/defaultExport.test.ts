@@ -1,8 +1,28 @@
 import { describe, expect, test } from "bun:test"
 import def from "../index"
 import { sll, sla, srl, sra, and, or, xor, nor, not, ext, ins } from "../bitwise"
-import { abs, add, sub, mul, div, mod, pow, sqrt, log, exp, min, max, lerp } from "../math"
+import { abs, add, sub, mul, div, mod, pow, sqrt, log, exp, min, max, lerp, move } from "../math"
 import { sin, cos, tan, acos, asin, atan, atan2 } from "../tigonometry"
+import {
+	seq,
+	sne,
+	slt,
+	sle,
+	sgt,
+	sge,
+	seqz,
+	snez,
+	sltz,
+	slez,
+	sgtz,
+	sgez,
+	sap,
+	sapz,
+	sna,
+	snaz,
+	snan,
+	snanz,
+} from "../comparison"
 
 describe("default export", () => {
 	expect(def).not.toBeNull()
@@ -33,6 +53,7 @@ describe("default export", () => {
 		expect(def.min).toBe(min)
 		expect(def.max).toBe(max)
 		expect(def.lerp).toBe(lerp)
+		expect(def.move).toBe(move)
 	})
 	test("contains all trigonometry functions", () => {
 		expect(def.sin).toBe(sin)
@@ -42,5 +63,25 @@ describe("default export", () => {
 		expect(def.asin).toBe(asin)
 		expect(def.atan).toBe(atan)
 		expect(def.atan2).toBe(atan2)
+	})
+	test("contains all comparison functions", () => {
+		expect(def.seq).toBe(seq)
+		expect(def.sne).toBe(sne)
+		expect(def.slt).toBe(slt)
+		expect(def.sle).toBe(sle)
+		expect(def.sgt).toBe(sgt)
+		expect(def.sge).toBe(sge)
+		expect(def.seqz).toBe(seqz)
+		expect(def.snez).toBe(snez)
+		expect(def.sltz).toBe(sltz)
+		expect(def.slez).toBe(slez)
+		expect(def.sgtz).toBe(sgtz)
+		expect(def.sgez).toBe(sgez)
+		expect(def.sap).toBe(sap)
+		expect(def.sapz).toBe(sapz)
+		expect(def.sna).toBe(sna)
+		expect(def.snaz).toBe(snaz)
+		expect(def.snan).toBe(snan)
+		expect(def.snanz).toBe(snanz)
 	})
 })

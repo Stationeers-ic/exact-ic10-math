@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { and, nor, not, or, sla, sll, sra, srl, xor, ext, ins } from "../index"
+import { and, nor, not, or, sla, sll, sra, srl, xor, ext, ins } from "../bitwise"
 
 describe("bitwise", () => {
 	test("sll", () => {

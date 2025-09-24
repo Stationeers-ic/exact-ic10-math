@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { abs, add, sub, mul, div, mod, pow, sqrt, log, exp, min, max, lerp } from "../math"
+import { abs, add, sub, mul, div, mod, pow, sqrt, log, exp, min, max, lerp, move } from "../math"
 
 describe("math", () => {
 	test("abs", () => {
@@ -222,5 +222,22 @@ describe("math", () => {
 		expect(lerp(-Infinity, 10, 0.5)).toBe(NaN)
 		expect(lerp(0, -Infinity, 0.5)).toBe(-Infinity)
 		expect(lerp(0, 10, -Infinity)).toBe(0)
+	})
+	test("move", () => {
+		expect(move(0)).toBe(0)
+		expect(move(-0)).toBe(-0)
+		expect(move(1)).toBe(1)
+		expect(move(-1)).toBe(-1)
+		expect(move(1.99)).toBe(1.99)
+		expect(move(-1.99)).toBe(-1.99)
+		expect(move(2147483647)).toBe(2147483647)
+		expect(move(-2147483648)).toBe(-2147483648)
+		expect(move(9223372036854776000)).toBe(9223372036854776000)
+		expect(move(-9223372036854776000)).toBe(-9223372036854776000)
+		expect(move(9223372036854777000)).toBe(9223372036854778000)
+		expect(move(-9223372036854777000)).toBe(-9223372036854778000)
+		expect(move(NaN)).toBe(NaN)
+		expect(move(Infinity)).toBe(Infinity)
+		expect(move(-Infinity)).toBe(-Infinity)
 	})
 })

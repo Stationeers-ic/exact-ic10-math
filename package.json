@@ -2,7 +2,7 @@
   "author": "Aidan647",
   "name": "exact-ic10-math",
   "description": "A library that faithfully implements IC10 math, bitwise, and logic instructions with exact behavior.",
-  "version": "1.1.0",
+  "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -11,8 +11,8 @@
     "format": "prettier . --write",
     "watch": "bun test --watch",
     "test": "bun test",
-    "build": "tsc",
-    "prepack": "bun test && tsc"
+    "build": "tsc --removeComments && tsc --declaration --emitDeclarationOnly",
+    "prepack": "bun test && bun run build"
   },
   "files": [
     "dist"

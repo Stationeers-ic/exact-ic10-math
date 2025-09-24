@@ -7,6 +7,8 @@
 > check individual function docs/tests for availability.
 >
 > ---
+>
+> [![install size](https://badgen.net/bundlephobia/minzip/exact-ic10-math) > ![install size](https://badgen.net/bundlephobia/tree-shaking/exact-ic10-math) > ![install size](https://badgen.net/bundlephobia/dependency-count/exact-ic10-math)](https://bundlephobia.com/package/exact-ic10-math)
 
 A library that faithfully implements IC10 math, bitwise, and logic instructions for Stationeers as TypeScript / JavaScript functions. The core goal is to mimic the game’s IC10 instruction semantics exactly — including operand orders, bit widths, wrapping behavior, and edge-case results — and to provide clear usage instructions so the functions behave like the in-game instructions.
 

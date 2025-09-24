@@ -45,6 +45,7 @@ describe("LongToDouble", () => {
 
 describe("GetVariableLong", () => {
 	test("signed", () => {
+		expect(GetVariableLong(0)).toBe(0n)
 		expect(GetVariableLong(1)).toBe(1n)
 		expect(GetVariableLong(-1)).toBe(-1n)
 		expect(GetVariableLong(2147483648)).toBe(2147483648n)
@@ -53,12 +54,13 @@ describe("GetVariableLong", () => {
 		expect(GetVariableLong(-9223372036854776000)).toBe(0n)
 		expect(GetVariableLong(9223372036854777000)).toBe(null)
 		expect(GetVariableLong(-9223372036854777000)).toBe(null)
-		expect(GetVariableLong(NaN)).toBe(null)
+		expect(GetVariableLong(NaN)).toBe(0n)
 		expect(GetVariableLong(Infinity)).toBe(null)
 		expect(GetVariableLong(-Infinity)).toBe(null)
 	})
 
 	test("unsigned", () => {
+		expect(GetVariableLong(0, false)).toBe(0n)
 		expect(GetVariableLong(1, false)).toBe(1n)
 		expect(GetVariableLong(-1, false)).toBe(18014398509481983n)
 		expect(GetVariableLong(2147483648, false)).toBe(2147483648n)
@@ -67,7 +69,7 @@ describe("GetVariableLong", () => {
 		expect(GetVariableLong(-9223372036854776000, false)).toBe(0n)
 		expect(GetVariableLong(9223372036854777000, false)).toBe(null)
 		expect(GetVariableLong(-9223372036854777000, false)).toBe(null)
-		expect(GetVariableLong(NaN, false)).toBe(null)
+		expect(GetVariableLong(NaN, false)).toBe(0n)
 		expect(GetVariableLong(Infinity, false)).toBe(null)
 		expect(GetVariableLong(-Infinity, false)).toBe(null)
 	})
@@ -75,12 +77,14 @@ describe("GetVariableLong", () => {
 
 describe("GetVariableInt", () => {
 	test("range", () => {
+		expect(GetVariableInt(0)).toBe(0n)
 		expect(GetVariableInt(1)).toBe(1n)
 		expect(GetVariableInt(-1)).toBe(-1n)
 		expect(GetVariableInt(1.99)).toBe(1n)
 		expect(GetVariableInt(-1.99)).toBe(-1n)
 		expect(GetVariableInt(2147483647)).toBe(2147483647n)
 		expect(GetVariableInt(-2147483648)).toBe(-2147483648n)
+		expect(GetVariableInt(NaN)).toBe(0n)
 	})
 
 	test("null", () => {
@@ -90,7 +94,6 @@ describe("GetVariableInt", () => {
 		expect(GetVariableInt(-9223372036854776000)).toBe(null)
 		expect(GetVariableInt(9223372036854777000)).toBe(null)
 		expect(GetVariableInt(-9223372036854777000)).toBe(null)
-		expect(GetVariableInt(NaN)).toBe(null)
 		expect(GetVariableInt(Infinity)).toBe(null)
 		expect(GetVariableInt(-Infinity)).toBe(null)
 	})

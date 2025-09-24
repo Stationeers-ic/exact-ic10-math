@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test"
 import def from "../index"
 import { sll, sla, srl, sra, and, or, xor, nor, not, ext, ins } from "../bitwise"
 import { abs, add, sub, mul, div, mod, pow, sqrt, log, exp, min, max, lerp } from "../math"
+import { sin, cos, tan, acos, asin, atan, atan2 } from "../tigonometry"
 
 describe("default export", () => {
 	expect(def).not.toBeNull()
@@ -32,5 +33,14 @@ describe("default export", () => {
 		expect(def.min).toBe(min)
 		expect(def.max).toBe(max)
 		expect(def.lerp).toBe(lerp)
+	})
+	test("contains all trigonometry functions", () => {
+		expect(def.sin).toBe(sin)
+		expect(def.cos).toBe(cos)
+		expect(def.tan).toBe(tan)
+		expect(def.acos).toBe(acos)
+		expect(def.asin).toBe(asin)
+		expect(def.atan).toBe(atan)
+		expect(def.atan2).toBe(atan2)
 	})
 })

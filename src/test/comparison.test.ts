@@ -18,6 +18,7 @@ import {
 	snaz,
 	snan,
 	snanz,
+	select,
 } from "../comparison"
 
 describe("comparison", () => {
@@ -212,5 +213,18 @@ describe("comparison", () => {
 		expect(snanz(-1)).toBe(1)
 		expect(snanz(Infinity)).toBe(1)
 		expect(snanz(-Infinity)).toBe(1)
+	})
+	test("select", () => {
+		expect(select(0, 1, 2)).toBe(2)
+		expect(select(1, 1, 2)).toBe(1)
+		expect(select(-1, 1, 2)).toBe(1)
+		expect(select(0, -1, -2)).toBe(-2)
+		expect(select(1, -1, -2)).toBe(-1)
+		expect(select(-1, -1, -2)).toBe(-1)
+		expect(select(NaN, 1, 2)).toBe(1)
+		expect(select(1, NaN, 2)).toBe(NaN)
+		expect(select(0, NaN, 2)).toBe(2)
+		expect(select(1, 1, NaN)).toBe(1)
+		expect(select(0, 1, NaN)).toBe(NaN)
 	})
 })

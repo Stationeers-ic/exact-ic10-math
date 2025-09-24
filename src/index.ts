@@ -28,6 +28,7 @@ import {
 	snaz,
 	snan,
 	snanz,
+	select,
 } from "./comparison"
 
 export default {
@@ -85,4 +86,5 @@ export default {
 	snaz,
 	snan,
 	snanz,
+	select,
 }

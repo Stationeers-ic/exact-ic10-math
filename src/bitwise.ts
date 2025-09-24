@@ -219,4 +219,3 @@ export function ins(x: number, a: number, b: number, c: number): null | number {
 
 	return LongToDouble(result)
 }
-export default { sll, sla, srl, sra, and, or, xor, nor, not, ext, ins }

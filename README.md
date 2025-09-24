@@ -1,5 +1,13 @@
 # exact-ic10-math
 
+> # 🟨 Beta
+>
+> This project is under active development. Not all IC10 functions are implemented yet. A
+> 1.0.0 release will include the complete set of math functions. Use the library with caution and
+> check individual function docs/tests for availability.
+>
+> ---
+
 A library that faithfully implements IC10 math, bitwise, and logic instructions for Stationeers as TypeScript / JavaScript functions. The core goal is to mimic the game’s IC10 instruction semantics exactly — including operand orders, bit widths, wrapping behavior, and edge-case results — and to provide clear usage instructions so the functions behave like the in-game instructions.
 
 This repo provides:

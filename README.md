@@ -48,3 +48,80 @@ console.log(cos(0)) // 1
 console.log(seq(1, 1)) // 1
 console.log(select(1, 42, 0)) // 42
 ```
+
+## Random
+
+A small deterministic PRNG that mirrors the game's behavior.
+
+Key points
+
+-   `new Random(seed?)` — create a generator; if omitted a seed is generated for you and available as `instance.seed`.
+-   `rand(random?)` — convenience wrapper. Pass a `Random` instance to use its `nextDouble()`; calling `rand()` with no argument uses the internal global RNG. Prefer passing your own instance for independent or reproducible streams.
+-   `Random.resetGlobalRandom(seed?)` — reseed (provide a `seed`) or clear (no args) the internal global RNG.
+-   `Random.getGlobalRandomSeed()` — read the currently-set global seed (or `null` if none).
+
+Why this matters
+
+Create a separate `Random` instance for each in-game code line (or logical RNG stream) to reproduce the game's behavior and avoid accidental sequence coupling.
+
+Example
+
+```ts
+import { Random, rand } from "exact-ic10-math"
+
+const rngLineA = new Random()
+const rngLineB = new Random()
+
+console.log(rand(rngLineA))
+console.log(rand(rngLineB))
+
+console.log(rngLineA.seed)
+console.log(rngLineB.seed)
+
+// Deterministic runs: pass a seed
+// const rngDet = new Random(12345)
+```
+
+Notes
+
+-   Tests validate specific integer sequences and floating outputs to ensure reproducible values across platforms.
+-   For fully reproducible runs, keep and use your own `Random` instances rather than relying on the global RNG.
+
+Replaying runs / capturing seeds
+
+Two simple approaches:
+
+-   Seed the global generator to replay a whole run. Set and record a global seed before creating generators so the sequence of instance seeds is repeatable:
+
+```ts
+import { Random } from "exact-ic10-math"
+
+// choose and record this seed for replay
+Random.resetGlobalRandom(111098293)
+
+const a = new Random()
+const b = new Random()
+
+console.log(Random.getGlobalRandomSeed() /* -> 111098293 */)
+console.log(a.seed, b.seed)
+
+// Later, to replay the same run:
+Random.resetGlobalRandom(111098293)
+const a2 = new Random()
+const b2 = new Random()
+// a2.seed === a.seed, b2.seed === b.seed
+// rand(a) === rand(a2)
+// rand(b) === rand(b2)
+```
+
+-   Capture an individual instance seed and recreate that instance later:
+
+```ts
+const r = new Random()
+console.log(r.seed) // store this value
+
+// later
+const rReplay = new Random(r.seed)
+```
+
+Use the global-seed approach when you want to reproduce the full set of generated instance seeds; use the instance-seed approach when you only need to replay a single generator.

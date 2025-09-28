@@ -3,6 +3,8 @@ export * from "./bitwise"
 export * from "./math"
 export * from "./tigonometry"
 export * from "./comparison"
+export * from "./rounding"
+export * from "./rand"
 export { float_epsilon, type BooleanLikeResult } from "./const"
 
 // Default export containing all functions
@@ -30,8 +32,8 @@ import {
 	snanz,
 	select,
 } from "./comparison"
-
 import { ceil, floor, round, trunc } from "./rounding"
+import { rand } from "./rand"
 
 export default {
 	// bitwise
@@ -94,4 +96,6 @@ export default {
 	floor,
 	round,
 	trunc,
+	// random
+	rand,
 }

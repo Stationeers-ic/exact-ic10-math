@@ -1,0 +1,89 @@
+function rand(random: Random): number
+function rand(): number
+function rand(random?: Random): number {
+	if (random !== undefined) return random.nextDouble()
+	return Math.random()
+}
+export { rand }
+
+export class Random {
+	readonly seed: number
+	private static RANDOM: Random | null = null
+	private static readonly MBIG = 2147483647
+	private static readonly MSMALL = -2147483648
+	private static readonly MSEED = 161803398
+	private inext = 0
+	private inextp = 21
+	private seedArray: number[] = new Array(56).fill(0)
+
+	constructor(seed?: number) {
+		if (seed === undefined) this.seed = Random.GenerateSeed()
+		else this.seed = Random.clampTrunc(seed)
+
+		let num = 0
+		let num2 = Random.MSEED - (this.seed == Random.MSMALL ? Random.MBIG : Math.abs(this.seed))
+		this.seedArray[55] = num2
+		let num3 = 1
+		for (let i = 1; i < 55; i++) {
+			num = (num + 21) % 55
+			this.seedArray[num] = num3
+			num3 = num2 - num3
+			if (num3 < 0) num3 += Random.MBIG
+			num2 = this.seedArray[num]
+		}
+		for (let j = 1; j < 5; j++) {
+			for (let k = 1; k < 56; k++) {
+				this.seedArray[k] -= this.seedArray[1 + ((k + 30) % 55)]
+				// handle underflow
+				this.seedArray[k] = Random.intUnderOverFlow(this.seedArray[k])
+				if (this.seedArray[k] < 0) this.seedArray[k] += Random.MBIG
+			}
+		}
+	}
+	private static clampTrunc(value: number): number {
+		if (value > Random.MBIG) return Random.MBIG
+		if (value < Random.MSMALL) return Random.MSMALL
+		return Math.trunc(value)
+	}
+	private static intUnderOverFlow(value: number): number {
+		if (value < Random.MSMALL) return value + 0x100000000
+		if (value > Random.MBIG) return value - 0x100000000
+		return value
+	}
+	private internalSample(): number {
+		let inext = this.inext
+		let inextp = this.inextp
+		if (++inext >= 56) inext = 1
+		if (++inextp >= 56) inextp = 1
+		let nextVal = this.seedArray[inext] - this.seedArray[inextp]
+		if (nextVal === Random.MBIG) nextVal--
+		if (nextVal < 0) nextVal += Random.MBIG
+		this.seedArray[inext] = nextVal
+		this.inext = inext
+		this.inextp = inextp
+		return nextVal
+	}
+	public next(): number {
+		return this.internalSample()
+	}
+	public nextDouble(): number {
+		const x = this.internalSample()
+		return x * (1.0 / Random.MBIG)
+	}
+	private static GenerateSeed(): number {
+		if (Random.RANDOM === null) Random.RANDOM = new Random(Math.floor(Math.random() * 0x80000000))
+		return Random.RANDOM.next()
+	}
+	public static resetGlobalRandom(newGlobalSeed: number): void
+	public static resetGlobalRandom(): void
+	public static resetGlobalRandom(newGlobalSeed?: number): void {
+		if (newGlobalSeed === undefined) {
+			Random.RANDOM = null
+			return
+		}
+		Random.RANDOM = new Random(Random.clampTrunc(newGlobalSeed))
+	}
+	public static getGlobalRandomSeed(): number | null {
+		return Random.RANDOM?.seed ?? null
+	}
+}

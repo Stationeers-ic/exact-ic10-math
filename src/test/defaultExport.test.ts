@@ -5,6 +5,7 @@ import * as math from "../math"
 import * as trigonometry from "../tigonometry"
 import * as comparison from "../comparison"
 import * as rounding from "../rounding"
+import { rand } from "../rand"
 
 describe("default export", () => {
 	expect(Default).not.toBeNull()
@@ -49,8 +50,14 @@ describe("default export", () => {
 			expect(Default[key]).toBe(rounding[key])
 		}
 	})
+	test("contains rand", () => {
+		expect(Default).toHaveProperty("rand")
+		expect(rand).toBeDefined()
+		// @ts-ignore
+		expect(Default.rand).toBe(rand)
+	})
 	test("doen't contain other", () => {
-		const all = { ...bitwise, ...math, ...trigonometry, ...comparison, ...rounding }
+		const all = { ...bitwise, ...math, ...trigonometry, ...comparison, ...rounding, rand }
 		for (const key in Default) {
 			expect(all).toHaveProperty(key)
 			// @ts-ignore

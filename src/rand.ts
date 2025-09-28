@@ -1,3 +1,18 @@
+/**
+ * Returns a pseudorandom number in [0, 1).
+ *
+ * If a `Random` instance is provided the call delegates to its `nextDouble()` method
+ * (deterministic, reproducible stream). If no instance is provided the function
+ * falls back to `Math.random()`.
+ *
+ * @example
+ * ```ts
+ * const x = rand()         // JS Math.random() when no instance supplied
+ * const r = new Random()
+ * const y = rand(r)       // deterministic value from c#
+ * ```
+ * @remarks In-game: rand r? a(r?|num)
+ */
 function rand(random: Random): number
 function rand(): number
 function rand(random?: Random): number {

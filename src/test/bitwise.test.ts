@@ -23,6 +23,7 @@ describe("bitwise", () => {
 	})
 	test("sla", () => {
 		expect(sll === sla).toBe(true)
+		expect(sla).toBe(sll)
 	})
 	test("srl", () => {
 		expect(srl(0x10000000000000, 1)).toBe(0x8000000000000)

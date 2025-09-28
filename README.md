@@ -18,7 +18,7 @@ This library reproduces Stationeers' IC10 instruction semantics exactly — use 
 
 ## Usage examples
 
-Default export (quickest):
+Default import (quickest):
 
 ```ts
 import ic10 from "exact-ic10-math"
@@ -37,14 +37,14 @@ console.log(ic10.ins(0, 1, 2, 3)) // 6
 Named import (ESM / TypeScript):
 
 ```ts
-import { round, mod, and, ext, ins, add, mul, abs } from "exact-ic10-math"
+import { sll, pow, sqrt, lerp, sin, cos, seq, select } from "exact-ic10-math"
 
-console.log(round(2.5)) // 2
-console.log(mod(-1, 5)) // 4
-console.log(and(5, 3)) // 1
-console.log(ext(15, 1, 2)) // 3
-console.log(ins(0, 1, 2, 3)) // 6
-console.log(add(2, 3)) // 5
-console.log(mul(4, 5)) // 20
-console.log(abs(-7)) // 7
+console.log(sll(1, 2)) // 4
+console.log(pow(2, 3)) // 8
+console.log(sqrt(9)) // 3
+console.log(lerp(0, 10, 0.5)) // 5
+console.log(sin(Math.PI / 2)) // 1
+console.log(cos(0)) // 1
+console.log(seq(1, 1)) // 1
+console.log(select(1, 42, 0)) // 42
 ```

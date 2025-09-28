@@ -61,7 +61,7 @@ export function LongToDouble(x: bigint): number {
 	return Number(x)
 }
 
-function flipBits(v: bigint, digits: bigint) {
+function flipBits(v: bigint, digits: bigint): bigint {
 	// Use the bitwise NOT (~) operator to flip all the bits in the given bigint 'v'.
 	const flipped = ~v
 

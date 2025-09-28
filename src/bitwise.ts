@@ -10,7 +10,7 @@ import { GetVariableInt, GetVariableLong, LongToDouble, DoubleToLong } from "./f
  * ```
  * @remarks In-game: sll r? a(r?|num) b(r?|num)
  */
-export function sll(a: number, b: number): null | number {
+export function sll(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
 	const vI = GetVariableInt(b)
 	if (vL == null || vI == null) return null
@@ -36,7 +36,7 @@ export const sla = sll
  * ```
  * @remarks In-game: srl r? a(r?|num) b(r?|num)
  */
-export function srl(a: number, b: number): null | number {
+export function srl(a: number, b: number): number | null {
 	const vL = GetVariableLong(a, false)
 	const vI = GetVariableInt(b)
 	if (vL == null || vI == null) return null
@@ -52,7 +52,7 @@ export function srl(a: number, b: number): null | number {
  * ```
  * @remarks In-game: sra r? a(r?|num) b(r?|num)
  */
-export function sra(a: number, b: number): null | number {
+export function sra(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
 	const vI = GetVariableInt(b)
 	if (vL == null || vI == null) return null
@@ -71,7 +71,7 @@ export function sra(a: number, b: number): null | number {
  * ```
  * @remarks In-game: and r? a(r?|num) b(r?|num)
  */
-export function and(a: number, b: number): null | number {
+export function and(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
 	const vI = GetVariableLong(b)
 	if (vL == null || vI == null) return null
@@ -89,7 +89,7 @@ export function and(a: number, b: number): null | number {
  * ```
  * @remarks In-game: or r? a(r?|num) b(r?|num)
  */
-export function or(a: number, b: number): null | number {
+export function or(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
 	const vI = GetVariableLong(b)
 	if (vL == null || vI == null) return null
@@ -106,7 +106,7 @@ export function or(a: number, b: number): null | number {
  * ```
  * @remarks In-game: xor r? a(r?|num) b(r?|num)
  */
-export function xor(a: number, b: number): null | number {
+export function xor(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
 	const vI = GetVariableLong(b)
 	if (vL == null || vI == null) return null
@@ -123,7 +123,7 @@ export function xor(a: number, b: number): null | number {
  * ```
  * @remarks In-game: nor r? a(r?|num) b(r?|num)
  */
-export function nor(a: number, b: number): null | number {
+export function nor(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
 	const vI = GetVariableLong(b)
 	if (vL == null || vI == null) return null
@@ -140,7 +140,7 @@ export function nor(a: number, b: number): null | number {
  * ```
  * @remarks In-game: not r? a(r?|num)
  */
-export function not(a: number): null | number {
+export function not(a: number): number | null {
 	const vL = GetVariableLong(a)
 	if (vL == null) return null
 	return LongToDouble(~vL)
@@ -156,7 +156,7 @@ export function not(a: number): null | number {
  * ```
  * @remarks In-game: ext r? a(r?|num) b(r?|num) c(r?|num)
  */
-export function ext(a: number, b: number, c: number): null | number {
+export function ext(a: number, b: number, c: number): number | null {
 	const vL = GetVariableLong(a, false)
 	const vStart = GetVariableInt(b)
 	const vLen = GetVariableInt(c)
@@ -191,7 +191,7 @@ export function ext(a: number, b: number, c: number): null | number {
  * Note: `x` is the value of the target register/index; it is not modified by
  * this function — the function returns the new value when successful.
  */
-export function ins(x: number, a: number, b: number, c: number): null | number {
+export function ins(x: number, a: number, b: number, c: number): number | null {
 	const vStart = GetVariableInt(a)
 	const vLen = GetVariableInt(b)
 	const vValue = GetVariableLong(c, false)

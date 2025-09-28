@@ -3,7 +3,7 @@ export * from "./bitwise"
 export * from "./math"
 export * from "./tigonometry"
 export * from "./comparison"
-export { float_epsilon, gameConstants } from "./const"
+export { float_epsilon, gameConstants, type BooleanResult } from "./const"
 
 // Default export containing all functions
 import { sll, sla, srl, sra, and, or, xor, nor, not, ext, ins } from "./bitwise"

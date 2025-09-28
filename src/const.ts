@@ -582,6 +582,8 @@ export const gameConstants = {
 	tau: 6.283185307179586,
 } as const
 
+export type BooleanResult = 0 | 1
+
 export default {
 	float_epsilon,
 	gameConstants,

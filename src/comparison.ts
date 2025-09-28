@@ -1,4 +1,4 @@
-import { float_epsilon } from "./const"
+import { type BooleanResult, float_epsilon } from "./const"
 import { abs, max } from "./math"
 
 /**
@@ -10,7 +10,7 @@ import { abs, max } from "./math"
  * ```
  * @remarks In-game: seq r? a(r?|num) b(r?|num)
  */
-export function seq(a: number, b: number): number {
+export function seq(a: number, b: number): BooleanResult {
 	return a === b ? 1 : 0
 }
 
@@ -23,7 +23,7 @@ export function seq(a: number, b: number): number {
  * ```
  * @remarks In-game: sne r? a(r?|num) b(r?|num)
  */
-export function sne(a: number, b: number): number {
+export function sne(a: number, b: number): BooleanResult {
 	return a !== b ? 1 : 0
 }
 
@@ -36,7 +36,7 @@ export function sne(a: number, b: number): number {
  * ```
  * @remarks In-game: slt r? a(r?|num) b(r?|num)
  */
-export function slt(a: number, b: number): number {
+export function slt(a: number, b: number): BooleanResult {
 	return a < b ? 1 : 0
 }
 
@@ -49,7 +49,7 @@ export function slt(a: number, b: number): number {
  * ```
  * @remarks In-game: sle r? a(r?|num) b(r?|num)
  */
-export function sle(a: number, b: number): number {
+export function sle(a: number, b: number): BooleanResult {
 	return a <= b ? 1 : 0
 }
 
@@ -62,7 +62,7 @@ export function sle(a: number, b: number): number {
  * ```
  * @remarks In-game: sgt r? a(r?|num) b(r?|num)
  */
-export function sgt(a: number, b: number): number {
+export function sgt(a: number, b: number): BooleanResult {
 	return a > b ? 1 : 0
 }
 
@@ -75,7 +75,7 @@ export function sgt(a: number, b: number): number {
  * ```
  * @remarks In-game: sge r? a(r?|num) b(r?|num)
  */
-export function sge(a: number, b: number): number {
+export function sge(a: number, b: number): BooleanResult {
 	return a >= b ? 1 : 0
 }
 
@@ -88,7 +88,7 @@ export function sge(a: number, b: number): number {
  * ```
  * @remarks In-game: seqz r? a(r?|num)
  */
-export function seqz(a: number): number {
+export function seqz(a: number): BooleanResult {
 	return seq(a, 0)
 }
 
@@ -101,7 +101,7 @@ export function seqz(a: number): number {
  * ```
  * @remarks In-game: snez r? a(r?|num)
  */
-export function snez(a: number): number {
+export function snez(a: number): BooleanResult {
 	return sne(a, 0)
 }
 
@@ -114,7 +114,7 @@ export function snez(a: number): number {
  * ```
  * @remarks In-game: sltz r? a(r?|num)
  */
-export function sltz(a: number): number {
+export function sltz(a: number): BooleanResult {
 	return slt(a, 0)
 }
 
@@ -127,7 +127,7 @@ export function sltz(a: number): number {
  * ```
  * @remarks In-game: slez r? a(r?|num)
  */
-export function slez(a: number): number {
+export function slez(a: number): BooleanResult {
 	return sle(a, 0)
 }
 
@@ -140,7 +140,7 @@ export function slez(a: number): number {
  * ```
  * @remarks In-game: sgtz r? a(r?|num)
  */
-export function sgtz(a: number): number {
+export function sgtz(a: number): BooleanResult {
 	return sgt(a, 0)
 }
 
@@ -153,7 +153,7 @@ export function sgtz(a: number): number {
  * ```
  * @remarks In-game: sgez r? a(r?|num)
  */
-export function sgez(a: number): number {
+export function sgez(a: number): BooleanResult {
 	return sge(a, 0)
 }
 
@@ -166,7 +166,7 @@ export function sgez(a: number): number {
  * ```
  * @remarks In-game: sap r? a(r?|num) b(r?|num) c(r?|num)
  */
-export function sap(a: number, b: number, c: number): number {
+export function sap(a: number, b: number, c: number): BooleanResult {
 	return sle(abs(a - b), max(c * max(abs(a), abs(b)), float_epsilon * 8))
 }
 
@@ -179,7 +179,7 @@ export function sap(a: number, b: number, c: number): number {
  * ```
  * @remarks In-game: sapz r? a(r?|num) b(r?|num)
  */
-export function sapz(a: number, b: number): number {
+export function sapz(a: number, b: number): BooleanResult {
 	return sap(a, 0, b)
 }
 
@@ -192,7 +192,7 @@ export function sapz(a: number, b: number): number {
  * ```
  * @remarks In-game: sna r? a(r?|num) b(r?|num) c(r?|num)
  */
-export function sna(a: number, b: number, c: number): number {
+export function sna(a: number, b: number, c: number): BooleanResult {
 	return sgt(abs(a - b), max(c * max(abs(a), abs(b)), float_epsilon * 8))
 }
 
@@ -205,7 +205,7 @@ export function sna(a: number, b: number, c: number): number {
  * ```
  * @remarks In-game: snaz r? a(r?|num) b(r?|num)
  */
-export function snaz(a: number, b: number): number {
+export function snaz(a: number, b: number): BooleanResult {
 	return sna(a, 0, b)
 }
 
@@ -218,7 +218,7 @@ export function snaz(a: number, b: number): number {
  * ```
  * @remarks In-game: snan r? a(r?|num)
  */
-export function snan(a: number): number {
+export function snan(a: number): BooleanResult {
 	return Number.isNaN(a) ? 1 : 0
 }
 
@@ -231,7 +231,7 @@ export function snan(a: number): number {
  * ```
  * @remarks In-game: snanz r? a(r?|num)
  */
-export function snanz(a: number): number {
+export function snanz(a: number): BooleanResult {
 	return Number.isNaN(a) ? 0 : 1
 }
 /**
@@ -243,6 +243,6 @@ export function snanz(a: number): number {
  * ```
  * @remarks In-game: select r? a(r?|num) b(r?|num) c(r?|num)
  */
-export function select(a: number, b: number, c: number): number {
+export function select<T extends number, K extends number>(a: number, b: T, c: K): T | K {
 	return a !== 0 ? b : c
 }

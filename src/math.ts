@@ -12,7 +12,7 @@ export function abs(a: number): number {
 }
 
 /**
- * Register = a + b.
+ * Returns the sum of `a` and `b`.
  *
  * @example
  * ```ts
@@ -25,7 +25,7 @@ export function add(a: number, b: number): number {
 }
 
 /**
- * Register = a - b.
+ * Returns the difference of `a` minus `b`.
  *
  * @example
  * ```ts
@@ -38,7 +38,7 @@ export function sub(a: number, b: number): number {
 }
 
 /**
- * Register = a * b.
+ * Returns the product of `a` and `b`.
  *
  * @example
  * ```ts
@@ -51,7 +51,7 @@ export function mul(a: number, b: number): number {
 }
 
 /**
- * Register = a / b.
+ * Returns the quotient of `a` divided by `b`.
  *
  * @example
  * ```ts
@@ -63,8 +63,8 @@ export function div(a: number, b: number): number {
 	return a / b
 }
 /**
- * Register = a % b. Returns a non-negative modulus result (JavaScript `%` adjusted
- * to behave like a mathematical modulus where result is in [0, b)).
+ * Returns the mathematical modulus of `a` mod `b` (result in [0, b)).
+ * Adjusts JavaScript's `%` so negative `a` produce non-negative results.
  *
  * @example
  * ```ts
@@ -78,7 +78,7 @@ export function mod(a: number, b: number): number {
 	return x
 }
 /**
- * Register = a ^ b (power).
+ * Returns `a` raised to the power of `b`.
  *
  * @example
  * ```ts
@@ -91,7 +91,7 @@ export function pow(a: number, b: number): number {
 }
 
 /**
- * Register = sqrt(a)
+ * Returns the square root of `a`.
  *
  * @example
  * ```ts
@@ -104,7 +104,7 @@ export function sqrt(a: number): number {
 }
 
 /**
- * Register = log(a)
+ * Returns the natural logarithm (base e) of `a`.
  *
  * @example
  * ```ts
@@ -117,7 +117,7 @@ export function log(a: number): number {
 }
 
 /**
- * Register = exp(a)
+ * Returns e raised to the power of `a`.
  *
  * @example
  * ```ts
@@ -130,7 +130,7 @@ export function exp(a: number): number {
 }
 
 /**
- * Register = min(a, b)
+ * Returns the smaller of `a` and `b`.
  *
  * @example
  * ```ts
@@ -143,7 +143,7 @@ export function min(a: number, b: number): number {
 }
 
 /**
- * Register = max(a, b)
+ * Returns the larger of `a` and `b`.
  *
  * @example
  * ```ts
@@ -155,8 +155,8 @@ export function max(a: number, b: number): number {
 	return Math.max(a, b)
 }
 /**
- * Linearly interpolates between `a` and `b` by fraction `t`. `t` is clamped
- * to [0, 1].
+ * Returns the linear interpolation between `a` and `b` by fraction `t`.
+ * `t` is clamped to [0, 1].
  *
  * @example
  * ```ts
@@ -169,7 +169,7 @@ export function lerp(a: number, b: number, t: number): number {
 }
 
 /**
- * Register = provided num or register value.
+ * Returns the provided value (no-op).
  *
  * @example
  * ```ts

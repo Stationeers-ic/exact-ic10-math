@@ -1,8 +1,8 @@
-import { type BooleanResult, float_epsilon } from "./const"
+import { type BooleanLikeResult, float_epsilon } from "./const"
 import { abs, max } from "./math"
 
 /**
- * Register = 1 if a == b, otherwise 0
+ * Returns 1 if `a === b`, otherwise 0.
  *
  * @example
  * ```ts
@@ -10,12 +10,12 @@ import { abs, max } from "./math"
  * ```
  * @remarks In-game: seq r? a(r?|num) b(r?|num)
  */
-export function seq(a: number, b: number): BooleanResult {
+export function seq(a: number, b: number): BooleanLikeResult {
 	return a === b ? 1 : 0
 }
 
 /**
- * Register = 1 if a != b, otherwise 0
+ * Returns 1 if `a !== b`, otherwise 0.
  *
  * @example
  * ```ts
@@ -23,12 +23,12 @@ export function seq(a: number, b: number): BooleanResult {
  * ```
  * @remarks In-game: sne r? a(r?|num) b(r?|num)
  */
-export function sne(a: number, b: number): BooleanResult {
+export function sne(a: number, b: number): BooleanLikeResult {
 	return a !== b ? 1 : 0
 }
 
 /**
- * Register = 1 if a < b, otherwise 0
+ * Returns 1 if `a < b`, otherwise 0.
  *
  * @example
  * ```ts
@@ -36,12 +36,12 @@ export function sne(a: number, b: number): BooleanResult {
  * ```
  * @remarks In-game: slt r? a(r?|num) b(r?|num)
  */
-export function slt(a: number, b: number): BooleanResult {
+export function slt(a: number, b: number): BooleanLikeResult {
 	return a < b ? 1 : 0
 }
 
 /**
- * Register = 1 if a <= b, otherwise 0
+ * Returns 1 if `a <= b`, otherwise 0.
  *
  * @example
  * ```ts
@@ -49,12 +49,12 @@ export function slt(a: number, b: number): BooleanResult {
  * ```
  * @remarks In-game: sle r? a(r?|num) b(r?|num)
  */
-export function sle(a: number, b: number): BooleanResult {
+export function sle(a: number, b: number): BooleanLikeResult {
 	return a <= b ? 1 : 0
 }
 
 /**
- * Register = 1 if a > b, otherwise 0
+ * Returns 1 if `a > b`, otherwise 0.
  *
  * @example
  * ```ts
@@ -62,12 +62,12 @@ export function sle(a: number, b: number): BooleanResult {
  * ```
  * @remarks In-game: sgt r? a(r?|num) b(r?|num)
  */
-export function sgt(a: number, b: number): BooleanResult {
+export function sgt(a: number, b: number): BooleanLikeResult {
 	return a > b ? 1 : 0
 }
 
 /**
- * Register = 1 if a >= b, otherwise 0
+ * Returns 1 if `a >= b`, otherwise 0.
  *
  * @example
  * ```ts
@@ -75,12 +75,12 @@ export function sgt(a: number, b: number): BooleanResult {
  * ```
  * @remarks In-game: sge r? a(r?|num) b(r?|num)
  */
-export function sge(a: number, b: number): BooleanResult {
+export function sge(a: number, b: number): BooleanLikeResult {
 	return a >= b ? 1 : 0
 }
 
 /**
- * Register = 1 if a == 0, otherwise 0
+ * Returns 1 if `a === 0`, otherwise 0.
  *
  * @example
  * ```ts
@@ -88,12 +88,12 @@ export function sge(a: number, b: number): BooleanResult {
  * ```
  * @remarks In-game: seqz r? a(r?|num)
  */
-export function seqz(a: number): BooleanResult {
+export function seqz(a: number): BooleanLikeResult {
 	return seq(a, 0)
 }
 
 /**
- * Register = 1 if a != 0, otherwise 0
+ * Returns 1 if `a !== 0`, otherwise 0.
  *
  * @example
  * ```ts
@@ -101,12 +101,12 @@ export function seqz(a: number): BooleanResult {
  * ```
  * @remarks In-game: snez r? a(r?|num)
  */
-export function snez(a: number): BooleanResult {
+export function snez(a: number): BooleanLikeResult {
 	return sne(a, 0)
 }
 
 /**
- * Register = 1 if a < 0, otherwise 0
+ * Returns 1 if `a < 0`, otherwise 0.
  *
  * @example
  * ```ts
@@ -114,12 +114,12 @@ export function snez(a: number): BooleanResult {
  * ```
  * @remarks In-game: sltz r? a(r?|num)
  */
-export function sltz(a: number): BooleanResult {
+export function sltz(a: number): BooleanLikeResult {
 	return slt(a, 0)
 }
 
 /**
- * Register = 1 if a <= 0, otherwise 0
+ * Returns 1 if `a <= 0`, otherwise 0.
  *
  * @example
  * ```ts
@@ -127,12 +127,12 @@ export function sltz(a: number): BooleanResult {
  * ```
  * @remarks In-game: slez r? a(r?|num)
  */
-export function slez(a: number): BooleanResult {
+export function slez(a: number): BooleanLikeResult {
 	return sle(a, 0)
 }
 
 /**
- * Register = 1 if a > 0, otherwise 0
+ * Returns 1 if `a > 0`, otherwise 0.
  *
  * @example
  * ```ts
@@ -140,12 +140,12 @@ export function slez(a: number): BooleanResult {
  * ```
  * @remarks In-game: sgtz r? a(r?|num)
  */
-export function sgtz(a: number): BooleanResult {
+export function sgtz(a: number): BooleanLikeResult {
 	return sgt(a, 0)
 }
 
 /**
- * Register = 1 if a >= 0, otherwise 0
+ * Returns 1 if `a >= 0`, otherwise 0.
  *
  * @example
  * ```ts
@@ -153,12 +153,12 @@ export function sgtz(a: number): BooleanResult {
  * ```
  * @remarks In-game: sgez r? a(r?|num)
  */
-export function sgez(a: number): BooleanResult {
+export function sgez(a: number): BooleanLikeResult {
 	return sge(a, 0)
 }
 
 /**
- * Register = 1 if abs(a - b) <= max(c * max(abs(a), abs(b)), float.epsilon * 8), otherwise 0
+ * Returns 1 if abs(a - b) <= max(c * max(abs(a), abs(b)), float_epsilon * 8), otherwise 0.
  *
  * @example
  * ```ts
@@ -166,12 +166,12 @@ export function sgez(a: number): BooleanResult {
  * ```
  * @remarks In-game: sap r? a(r?|num) b(r?|num) c(r?|num)
  */
-export function sap(a: number, b: number, c: number): BooleanResult {
+export function sap(a: number, b: number, c: number): BooleanLikeResult {
 	return sle(abs(a - b), max(c * max(abs(a), abs(b)), float_epsilon * 8))
 }
 
 /**
- * Register = 1 if |a| <= float.epsilon * 8, otherwise 0
+ * Returns 1 if |a| <= float.epsilon * 8, otherwise 0.
  *
  * @example
  * ```ts
@@ -179,12 +179,12 @@ export function sap(a: number, b: number, c: number): BooleanResult {
  * ```
  * @remarks In-game: sapz r? a(r?|num) b(r?|num)
  */
-export function sapz(a: number, b: number): BooleanResult {
+export function sapz(a: number, b: number): BooleanLikeResult {
 	return sap(a, 0, b)
 }
 
 /**
- * Register = 1 if abs(a - b) > max(c * max(abs(a), abs(b)), float.epsilon * 8), otherwise 0
+ * Returns 1 if abs(a - b) > max(c * max(abs(a), abs(b)), float_epsilon * 8), otherwise 0.
  *
  * @example
  * ```ts
@@ -192,12 +192,12 @@ export function sapz(a: number, b: number): BooleanResult {
  * ```
  * @remarks In-game: sna r? a(r?|num) b(r?|num) c(r?|num)
  */
-export function sna(a: number, b: number, c: number): BooleanResult {
+export function sna(a: number, b: number, c: number): BooleanLikeResult {
 	return sgt(abs(a - b), max(c * max(abs(a), abs(b)), float_epsilon * 8))
 }
 
 /**
- * Register = 1 if |a| > float.epsilon, otherwise 0
+ * Returns 1 if |a| > float.epsilon, otherwise 0.
  *
  * @example
  * ```ts
@@ -205,12 +205,12 @@ export function sna(a: number, b: number, c: number): BooleanResult {
  * ```
  * @remarks In-game: snaz r? a(r?|num) b(r?|num)
  */
-export function snaz(a: number, b: number): BooleanResult {
+export function snaz(a: number, b: number): BooleanLikeResult {
 	return sna(a, 0, b)
 }
 
 /**
- * Register = 1 if a is NaN, otherwise 0
+ * Returns 1 if `a` is NaN, otherwise 0.
  *
  * @example
  * ```ts
@@ -218,12 +218,12 @@ export function snaz(a: number, b: number): BooleanResult {
  * ```
  * @remarks In-game: snan r? a(r?|num)
  */
-export function snan(a: number): BooleanResult {
+export function snan(a: number): BooleanLikeResult {
 	return Number.isNaN(a) ? 1 : 0
 }
 
 /**
- * Register = 0 if a is NaN, otherwise 1
+ * Returns 0 if `a` is NaN, otherwise 1.
  *
  * @example
  * ```ts
@@ -231,11 +231,11 @@ export function snan(a: number): BooleanResult {
  * ```
  * @remarks In-game: snanz r? a(r?|num)
  */
-export function snanz(a: number): BooleanResult {
+export function snanz(a: number): BooleanLikeResult {
 	return Number.isNaN(a) ? 0 : 1
 }
 /**
- * Register = b if a != 0, otherwise c
+ * Returns `b` if `a !== 0`, otherwise `c`.
  *
  * @example
  * ```ts

@@ -4,6 +4,7 @@ import * as bitwise from "../bitwise"
 import * as math from "../math"
 import * as trigonometry from "../tigonometry"
 import * as comparison from "../comparison"
+import * as rounding from "../rounding"
 
 describe("default export", () => {
 	expect(Default).not.toBeNull()
@@ -40,8 +41,16 @@ describe("default export", () => {
 			expect(Default[key]).toBe(comparison[key])
 		}
 	})
+	test("contains all rounding functions", () => {
+		for (const key in rounding) {
+			expect(Default).toHaveProperty(key)
+			expect(rounding).toHaveProperty(key)
+			// @ts-ignore
+			expect(Default[key]).toBe(rounding[key])
+		}
+	})
 	test("doen't contain other", () => {
-		const all = { ...bitwise, ...math, ...trigonometry, ...comparison }
+		const all = { ...bitwise, ...math, ...trigonometry, ...comparison, ...rounding }
 		for (const key in Default) {
 			expect(all).toHaveProperty(key)
 			// @ts-ignore

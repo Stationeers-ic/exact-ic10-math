@@ -12,47 +12,39 @@
 
 A library that faithfully implements IC10 math, bitwise, and logic instructions for Stationeers as TypeScript / JavaScript functions. The core goal is to mimic the game’s IC10 instruction semantics exactly — including operand orders, bit widths, wrapping behavior, and edge-case results — and to provide clear usage instructions so the functions behave like the in-game instructions.
 
-This repo provides:
+## Compatibility note
 
--   Implementations of IC10 bitwise/instruction-level operations (e.g. AND, OR, XOR, NOT, SLL/SLA, SRL, SRA, EXT, INS).
--   Helpers for numeric/bit conversions used by those instructions.
--   Usage instructions and examples so the functions can be used in TS/JS projects with predictable, game-accurate behavior.
+This library reproduces Stationeers' IC10 instruction semantics exactly — use it when you need faithful in-game behavior; other JS/TS libraries may differ in edge cases.
 
-## Install
+## Usage examples
 
-```bash
-npm i exact-ic10-math
-# or
-bun add exact-ic10-math
-```
-
-## Quick examples / usage instructions
-
-Named imports (recommended for tree-shaking):
+Default export (quickest):
 
 ```ts
-import { sll, not, or, ext, ins } from "exact-ic10-math"
+import ic10 from "exact-ic10-math"
 
-console.log(sll(1, 2)) // 4
-console.log(not(10)) // -11        (IC10-style two's complement semantics)
-console.log(or(0b1100, 0b0110)) // 14
+// basic math
+console.log(ic10.add(2, 3)) // 5
+console.log(ic10.mul(4, 5)) // 20
+console.log(ic10.abs(-7)) // 7
+console.log(ic10.round(2.5)) // 2
 
-// extract bits: (value, start, length)
-console.log(ext(0b1011, 1, 2)) // 1
-
-// insert bits: (value, insertValue, start, length)
-console.log(ins(9223372036854776000, 1, 1, 1)) // wraps like in-game
+// bitwise / fields
+console.log(ic10.and(5, 3)) // 1
+console.log(ic10.ins(0, 1, 2, 3)) // 6
 ```
 
-Default import (single object):
+Named import (ESM / TypeScript):
 
 ```ts
-import funcs from "exact-ic10-math"
-console.log(funcs.sll(1, 2)) // 4
+import { round, mod, and, ext, ins, add, mul, abs } from "exact-ic10-math"
+
+console.log(round(2.5)) // 2
+console.log(mod(-1, 5)) // 4
+console.log(and(5, 3)) // 1
+console.log(ext(15, 1, 2)) // 3
+console.log(ins(0, 1, 2, 3)) // 6
+console.log(add(2, 3)) // 5
+console.log(mul(4, 5)) // 20
+console.log(abs(-7)) // 7
 ```
-
-Notes and behavior
-
--   Function names and argument order mirror IC10 instruction names where practical. This makes the helpers usable as drop-in logic when porting IC10 code to TS/JS.
--   Return type: `number | null`. `null` indicates an invalid input or out-of-range operands (see type definitions in `dist/index.d.ts`).
--   Numeric semantics: implementations target the same 53‑bit payload behavior used by the game (wrapping/truncation, sign behavior, etc.). Large integer literals will wrap similarly to in-game values.

@@ -3,7 +3,7 @@ export * from "./bitwise"
 export * from "./math"
 export * from "./tigonometry"
 export * from "./comparison"
-export { float_epsilon, gameConstants, type BooleanResult } from "./const"
+export { float_epsilon, type BooleanLikeResult } from "./const"
 
 // Default export containing all functions
 import { sll, sla, srl, sra, and, or, xor, nor, not, ext, ins } from "./bitwise"
@@ -30,6 +30,8 @@ import {
 	snanz,
 	select,
 } from "./comparison"
+
+import { ceil, floor, round, trunc } from "./rounding"
 
 export default {
 	// bitwise
@@ -87,4 +89,9 @@ export default {
 	snan,
 	snanz,
 	select,
+	// rounding
+	ceil,
+	floor,
+	round,
+	trunc,
 }

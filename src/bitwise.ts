@@ -1,8 +1,7 @@
 import { GetVariableInt, GetVariableLong, LongToDouble, DoubleToLong } from "./functions"
 
 /**
- * Performs a logical left shift of the 64-bit value in `a` by `b` bits and
- * returns the resulting value (as a number).
+ * Returns the result of logically left-shifting the 64-bit value in `a` by `b` bits.
  *
  * @example
  * ```ts
@@ -17,7 +16,7 @@ export function sll(a: number, b: number): number | null {
 	return LongToDouble(vL << vI % 64n)
 }
 /**
- * SLA is the same as SLL (logical shift left).
+ * Alias for `sll` (logical shift left).
  *
  * @example
  * ```ts
@@ -27,8 +26,7 @@ export function sll(a: number, b: number): number | null {
  */
 export const sla = sll
 /**
- * Performs a logical (unsigned) right shift of the 64-bit value in `a` by
- * `b` bits and returns the resulting value.
+ * Returns the result of logically (unsigned) right-shifting the 64-bit value in `a` by `b` bits.
  *
  * @example
  * ```ts
@@ -43,8 +41,8 @@ export function srl(a: number, b: number): number | null {
 	return LongToDouble(vL >> vI % 64n)
 }
 /**
- * Performs an arithmetic (signed) right shift of the 64-bit value in `a`
- * by `b` bits and returns the resulting value (preserves sign bit).
+ * Returns the result of arithmetically (signed) right-shifting the 64-bit value in `a` by `b` bits.
+ * Preserves the sign bit.
  *
  * @example
  * ```ts
@@ -60,10 +58,7 @@ export function sra(a: number, b: number): number | null {
 }
 
 /**
- * Performs a bitwise logical AND operation on the binary representation of
- * two values. Each bit of the result is determined by evaluating the
- * corresponding bits of the input values. If both bits are 1, the resulting
- * bit is set to 1. Otherwise the resulting bit is set to 0.
+ * Returns the bitwise AND of `a` and `b` (operating on 64-bit values).
  *
  * @example
  * ```ts
@@ -78,10 +73,7 @@ export function and(a: number, b: number): number | null {
 	return LongToDouble(vL & vI)
 }
 /**
- * Performs a bitwise logical OR operation on the binary representation of
- * two values. Each bit of the result is determined by evaluating the
- * corresponding bits of the input values. If either bit is 1, the resulting
- * bit is set to 1. If both bits are 0, the resulting bit is set to 0.
+ * Returns the bitwise OR of `a` and `b` (operating on 64-bit values).
  *
  * @example
  * ```ts
@@ -96,9 +88,7 @@ export function or(a: number, b: number): number | null {
 	return LongToDouble(vL | vI)
 }
 /**
- * Performs a bitwise exclusive OR (XOR) operation between two values. Each
- * bit of the result is 1 when the corresponding bits of the operands are
- * different, and 0 when they are the same.
+ * Returns the bitwise XOR of `a` and `b` (operating on 64-bit values).
  *
  * @example
  * ```ts
@@ -113,9 +103,7 @@ export function xor(a: number, b: number): number | null {
 	return LongToDouble(vL ^ vI)
 }
 /**
- * Performs a bitwise logical NOR (NOT OR) operation on the binary
- * representation of two values. If both input bits are 0 the resulting bit
- * is set to 1; otherwise the resulting bit is 0.
+ * Returns the bitwise NOR of `a` and `b` (operating on 64-bit values).
  *
  * @example
  * ```ts
@@ -130,9 +118,7 @@ export function nor(a: number, b: number): number | null {
 	return LongToDouble(~(vL | vI))
 }
 /**
- * Performs a bitwise logical NOT operation flipping each bit of the input
- * value, resulting in a binary complement. If a bit is 1, it becomes 0,
- * and if a bit is 0, it becomes 1.
+ * Returns the bitwise NOT (complement) of `a` (operating on 64-bit values).
  *
  * @example
  * ```ts
@@ -146,9 +132,8 @@ export function not(a: number): number | null {
 	return LongToDouble(~vL)
 }
 /**
- * Extracts a bit field from `a`, beginning at bit index `b` for length `c`,
- * and places the extracted value in the register. Payload cannot exceed 53
- * bits in final length.
+ * Returns a bit-field extracted from `a` starting at index `b` for length `c`.
+ * Payload cannot exceed 53 bits in final length.
  *
  * @example
  * ```ts
@@ -179,9 +164,9 @@ export function ext(a: number, b: number, c: number): number | null {
 	return LongToDouble(extracted)
 }
 /**
- * Inserts a bit field of `a` into the provided register `x`, beginning at
- * bit index `b` for length `c`. Payload cannot exceed 53 bits in final
- * length.
+ * Returns a new value produced by inserting a bit-field of `a` into `x`
+ * starting at index `b` for length `c`. Payload cannot exceed 53 bits in
+ * final length.
  *
  * @example
  * ```ts

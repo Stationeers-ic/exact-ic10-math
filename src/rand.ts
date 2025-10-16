@@ -83,7 +83,7 @@ export class Random {
 	}
 	public nextDouble(): number {
 		const x = this.internalSample()
-		return x * (1.0 / Random.MBIG)
+		return x / Random.MBIG
 	}
 	private static GenerateSeed(): number {
 		if (Random.RANDOM === null) Random.RANDOM = new Random(Math.floor(Math.random() * 0x80000000))

@@ -4,7 +4,7 @@ async function updateHashes(url: string, path: string) {
 	let result: string = "[\n"
 	for (let i = 0; i < data.length; i++) {
 		const item = data[i]
-		result += `  ["${item.PrefabName}", ${item.PrefabHash}]${i === data.length - 1 ? "" : ","}\n`
+		result += `\t["${item.PrefabName}", ${item.PrefabHash}]${i === data.length - 1 ? "" : ","}\n`
 	}
 	return Bun.write(path, result + "]\n")
 }

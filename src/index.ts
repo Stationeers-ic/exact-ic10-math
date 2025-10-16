@@ -6,6 +6,7 @@ export * from "./comparison"
 export * from "./rounding"
 export * from "./rand"
 export { float_epsilon, type BooleanLikeResult } from "./const"
+export { hashString } from "./crc"
 
 // Default export containing all functions
 import { sll, sla, srl, sra, and, or, xor, nor, not, ext, ins } from "./bitwise"

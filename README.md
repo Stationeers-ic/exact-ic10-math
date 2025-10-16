@@ -49,6 +49,16 @@ console.log(seq(1, 1)) // 1
 console.log(select(1, 42, 0)) // 42
 ```
 
+## CRC32 / String hashing
+
+The library includes `hashString(str)` — a CRC32 implementation that computes a numeric hash for any string, matching the game's hashing behavior. Useful for converting device names or other string identifiers into numeric values.
+
+```ts
+import { hashString } from "exact-ic10-math"
+
+console.log(hashString("StructureAirlockGate")) // 1736080881
+```
+
 ## Random
 
 A small deterministic PRNG that mirrors the game's behavior.

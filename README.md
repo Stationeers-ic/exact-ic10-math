@@ -1,12 +1,4 @@
-# exact-ic10-math
-
-> # 🟨 Beta
->
-> This project is under active development. Not all IC10 functions are implemented yet. A
-> 1.0.0 release will include the complete set of math functions. Use the library with caution and
-> check individual function docs/tests for availability.
->
-> ---
+> # exact-ic10-math
 >
 > [![bundle size](https://badgen.net/bundlephobia/minzip/exact-ic10-math) ![tree shaking](https://badgen.net/bundlephobia/tree-shaking/exact-ic10-math) ![dependency count](https://badgen.net/bundlephobia/dependency-count/exact-ic10-math)](https://bundlephobia.com/package/exact-ic10-math)
 

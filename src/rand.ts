@@ -30,6 +30,7 @@ export class Random {
 	private inext = 0
 	private inextp = 21
 	private seedArray: Int32Array = new Int32Array(56)
+	// private seedArray: number[] = new Array(56).fill(0)
 	private _timesSampled = 0
 	get timesSampled(): number {
 		return this._timesSampled

@@ -1,4 +1,4 @@
-function crc32Table() {
+function crc32Table(): Uint32Array {
 	const table = new Uint32Array(256)
 	let c: number
 	for (let n = 0; n < 256; n++) {
@@ -11,7 +11,7 @@ function crc32Table() {
 	return table
 }
 
-const CRC32_TABLE = crc32Table()
+const CRC32_TABLE: Readonly<Uint32Array> = crc32Table()
 const TEXT_ENCODER = new TextEncoder()
 
 /**

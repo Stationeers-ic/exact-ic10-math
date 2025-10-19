@@ -29,7 +29,11 @@ export class Random {
 	private static readonly MSEED = 161803398
 	private inext = 0
 	private inextp = 21
-	private seedArray: number[] = new Array(56).fill(0)
+	private seedArray: Int32Array = new Int32Array(56)
+	private _timesSampled = 0
+	get timesSampled(): number {
+		return this._timesSampled
+	}
 
 	constructor(seed?: number) {
 		if (seed === undefined) this.seed = Random.GenerateSeed()
@@ -50,7 +54,7 @@ export class Random {
 			for (let k = 1; k < 56; k++) {
 				this.seedArray[k] -= this.seedArray[1 + ((k + 30) % 55)]
 				// handle underflow
-				this.seedArray[k] = Random.intUnderOverFlow(this.seedArray[k])
+				// this.seedArray[k] = Random.intUnderOverFlow(this.seedArray[k])
 				if (this.seedArray[k] < 0) this.seedArray[k] += Random.MBIG
 			}
 		}
@@ -66,21 +70,26 @@ export class Random {
 		return value
 	}
 	private internalSample(): number {
-		let inext = this.inext
-		let inextp = this.inextp
-		if (++inext >= 56) inext = 1
-		if (++inextp >= 56) inextp = 1
-		let nextVal = this.seedArray[inext] - this.seedArray[inextp]
+		this._timesSampled++
+		if (++this.inext >= 56) this.inext = 1
+		if (++this.inextp >= 56) this.inextp = 1
+		let nextVal = this.seedArray[this.inext] - this.seedArray[this.inextp]
 		if (nextVal === Random.MBIG) nextVal--
 		if (nextVal < 0) nextVal += Random.MBIG
-		this.seedArray[inext] = nextVal
-		this.inext = inext
-		this.inextp = inextp
+		this.seedArray[this.inext] = nextVal
 		return nextVal
 	}
+	/**
+	 * Returns a pseudorandom integer in [0, 2147483647).
+	 * use for generating random integers for seeds.
+	 */
 	public next(): number {
 		return this.internalSample()
 	}
+	/**
+	 * Returns a pseudorandom number in [0, 1).
+	 * Use for generating random fractions.
+	 */
 	public nextDouble(): number {
 		const x = this.internalSample()
 		return x / Random.MBIG

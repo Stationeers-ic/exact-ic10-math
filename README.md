@@ -54,6 +54,7 @@ console.log(ic10.ins(0, 1, 2, 3)) // 6
 ### Named imports
 
 For ESM / TypeScript projects:
+Better for tree-shaking.
 
 ```ts
 import { sll, pow, sqrt, lerp, sin, cos, seq, select } from "exact-ic10-math"

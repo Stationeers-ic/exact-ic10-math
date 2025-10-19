@@ -1,5 +1,12 @@
 // A flag representing the 53rd bit in a 64-bit bigint, often used for special operations or to detect specific conditions.
-const highBitFlag = 0x20000000000000n // Value: 9007199254740992
+/**
+ * Value: 0x20000000000000n
+ */
+export const highBitFlag = 0x20000000000000n
+/**
+ * Value: 0x1fffffffffffffn
+ */
+export const MASK53 = 0x1fffffffffffffn
 
 export function GetVariableLong(x: number | bigint, signed = true): bigint | null {
 	if (typeof x === "number") {
@@ -49,13 +56,13 @@ export function DoubleToLong(x: bigint, signed: boolean): bigint {
 }
 export function LongToDouble(x: bigint): number {
 	// Check if the input has the 52nd bit set, indicating a potentially negative value in the long format.
-	const isNegative = (x & highBitFlag) != 0n // 9007199254740992
+	const isNegative = (x & highBitFlag) != 0n
 	// Apply a mask to retain only the lower 53 bits, excluding the 52nd bit, which may represent a sign bit.
-	x &= 0x1fffffffffffffn // 9007199254740991
+	x &= MASK53
 	// If the sign bit was set, reintroduce a large negative offset to account for it.
 	if (isNegative) {
 		// Apply a negative offset to convert back to the expected value.
-		x |= -9007199254740992n
+		x |= -highBitFlag
 	}
 	// Convert the bigint to a number (floating-point double) and return it.
 	return Number(x)

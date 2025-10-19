@@ -7,9 +7,10 @@
  * ```
  * @remarks In-game: ceil r? a(r?|num)
  */
-export function ceil(a: number): number {
-	return Math.ceil(a)
-}
+export const ceil: (a: number) => number = Math.ceil
+// export function ceil(a: number): number {
+// 	return Math.ceil(a)
+// }
 
 /**
  * Returns the largest integer less than the specified value `a`.
@@ -20,9 +21,10 @@ export function ceil(a: number): number {
  * ```
  * @remarks In-game: floor r? a(r?|num)
  */
-export function floor(a: number): number {
-	return Math.floor(a)
-}
+export const floor: (a: number) => number = Math.floor
+// export function floor(a: number): number {
+// 	return Math.floor(a)
+// }
 
 /**
  * Returns `a` rounded to the nearest integer using IC10 tie-breaking
@@ -52,6 +54,7 @@ export function round(a: number): number {
  * ```
  * @remarks In-game: trunc r? a(r?|num)
  */
-export function trunc(a: number): number {
-	return Math.trunc(a)
-}
+export const trunc: (a: number) => number = Math.trunc
+// export function trunc(a: number): number {
+// 	return Math.trunc(a)
+// }

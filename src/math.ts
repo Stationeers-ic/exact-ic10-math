@@ -7,9 +7,10 @@
  * ```
  * @remarks In-game: abs r? a(r?|num)
  */
-export function abs(a: number): number {
-	return Math.abs(a)
-}
+export const abs: (a: number) => number = Math.abs
+// export function abs(a: number): number {
+// 	return Math.abs(a)
+// }
 
 /**
  * Returns the sum of `a` and `b`.
@@ -86,9 +87,10 @@ export function mod(a: number, b: number): number {
  * ```
  * @remarks In-game: pow r? a(r?|num) b(r?|num)
  */
-export function pow(a: number, b: number): number {
-	return Math.pow(a, b)
-}
+export const pow: (a: number, b: number) => number = Math.pow
+// export function pow(a: number, b: number): number {
+// 	return Math.pow(a, b)
+// }
 
 /**
  * Returns the square root of `a`.
@@ -99,9 +101,10 @@ export function pow(a: number, b: number): number {
  * ```
  * @remarks In-game: sqrt r? a(r?|num)
  */
-export function sqrt(a: number): number {
-	return Math.sqrt(a)
-}
+export const sqrt: (a: number) => number = Math.sqrt
+// export function sqrt(a: number): number {
+// 	return Math.sqrt(a)
+// }
 
 /**
  * Returns the natural logarithm (base e) of `a`.
@@ -112,9 +115,10 @@ export function sqrt(a: number): number {
  * ```
  * @remarks In-game: log r? a(r?|num)
  */
-export function log(a: number): number {
-	return Math.log(a)
-}
+export const log: (a: number) => number = Math.log
+// export function log(a: number): number {
+// 	return Math.log(a)
+// }
 
 /**
  * Returns e raised to the power of `a`.
@@ -125,9 +129,10 @@ export function log(a: number): number {
  * ```
  * @remarks In-game: exp r? a(r?|num)
  */
-export function exp(a: number): number {
-	return Math.exp(a)
-}
+export const exp: (a: number) => number = Math.exp
+// export function exp(a: number): number {
+// 	return Math.exp(a)
+// }
 
 /**
  * Returns the smaller of `a` and `b`.
@@ -138,9 +143,10 @@ export function exp(a: number): number {
  * ```
  * @remarks In-game: min r? a(r?|num) b(r?|num)
  */
-export function min(a: number, b: number): number {
-	return Math.min(a, b)
-}
+export const min: (a: number, b: number) => number = Math.min
+// export function min(a: number, b: number): number {
+// 	return Math.min(a, b)
+// }
 
 /**
  * Returns the larger of `a` and `b`.
@@ -151,9 +157,10 @@ export function min(a: number, b: number): number {
  * ```
  * @remarks In-game: max r? a(r?|num) b(r?|num)
  */
-export function max(a: number, b: number): number {
-	return Math.max(a, b)
-}
+export const max: (a: number, b: number) => number = Math.max
+// export function max(a: number, b: number): number {
+// 	return Math.max(a, b)
+// }
 /**
  * Returns the linear interpolation between `a` and `b` by fraction `t`.
  * `t` is clamped to [0, 1].
@@ -165,7 +172,8 @@ export function max(a: number, b: number): number {
  * @remarks In-game: lerp r? a(r?|num) b(r?|num) t(r?|num)
  */
 export function lerp(a: number, b: number, t: number): number {
-	return a + (b - a) * min(max(t, 0), 1)
+	const clamped = t < 0 ? 0 : t > 1 ? 1 : t
+	return a + (b - a) * clamped
 }
 
 /**

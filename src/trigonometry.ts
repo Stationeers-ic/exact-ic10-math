@@ -7,9 +7,10 @@
  * ```
  * @remarks In-game: sin r? a(r?|num)
  */
-export function sin(a: number): number {
-	return Math.sin(a)
-}
+export const sin: (a: number) => number = Math.sin
+// export function sin(a: number): number {
+// 	return Math.sin(a)
+// }
 
 /**
  * Returns the cosine of the specified angle (radians).
@@ -20,9 +21,10 @@ export function sin(a: number): number {
  * ```
  * @remarks In-game: cos r? a(r?|num)
  */
-export function cos(a: number): number {
-	return Math.cos(a)
-}
+export const cos: (a: number) => number = Math.cos
+// export function cos(a: number): number {
+// 	return Math.cos(a)
+// }
 
 /**
  * Returns the tangent of the specified angle (radians).
@@ -33,9 +35,10 @@ export function cos(a: number): number {
  * ```
  * @remarks In-game: tan r? a(r?|num)
  */
-export function tan(a: number): number {
-	return Math.tan(a)
-}
+export const tan: (a: number) => number = Math.tan
+// export function tan(a: number): number {
+// 	return Math.tan(a)
+// }
 
 /**
  * Returns the angle (radians) whose sine is the specified value.
@@ -46,9 +49,10 @@ export function tan(a: number): number {
  * ```
  * @remarks In-game: asin r? a(r?|num)
  */
-export function asin(a: number): number {
-	return Math.asin(a)
-}
+export const asin: (a: number) => number = Math.asin
+// export function asin(a: number): number {
+// 	return Math.asin(a)
+// }
 
 /**
  * Returns the angle (radians) whose cosine is the specified value.
@@ -59,9 +63,10 @@ export function asin(a: number): number {
  * ```
  * @remarks In-game: acos r? a(r?|num)
  */
-export function acos(a: number): number {
-	return Math.acos(a)
-}
+export const acos: (a: number) => number = Math.acos
+// export function acos(a: number): number {
+// 	return Math.acos(a)
+// }
 
 /**
  * Returns the angle (radians) whose tangent is the specified value.
@@ -72,9 +77,10 @@ export function acos(a: number): number {
  * ```
  * @remarks In-game: atan r? a(r?|num)
  */
-export function atan(a: number): number {
-	return Math.atan(a)
-}
+export const atan: (a: number) => number = Math.atan
+// export function atan(a: number): number {
+// 	return Math.atan(a)
+// }
 
 /**
  * Returns the angle (radians) whose tangent is the quotient of two
@@ -86,6 +92,7 @@ export function atan(a: number): number {
  * ```
  * @remarks In-game: atan2 r? a(r?|num) b(r?|num)
  */
-export function atan2(a: number, b: number): number {
-	return Math.atan2(a, b)
-}
+export const atan2: (a: number, b: number) => number = Math.atan2
+// export function atan2(a: number, b: number): number {
+// 	return Math.atan2(a, b)
+// }

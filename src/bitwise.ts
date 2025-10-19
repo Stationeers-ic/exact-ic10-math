@@ -1,4 +1,4 @@
-import { GetVariableInt, GetVariableLong, LongToDouble, DoubleToLong } from "./functions"
+import { GetVariableInt, GetVariableLong, LongToDouble, DoubleToLong, MASK53 } from "./functions"
 
 /**
  * Returns the result of logically left-shifting.
@@ -11,8 +11,9 @@ import { GetVariableInt, GetVariableLong, LongToDouble, DoubleToLong } from "./f
  */
 export function sll(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
+	if (vL == null) return null
 	const vI = GetVariableInt(b)
-	if (vL == null || vI == null) return null
+	if (vI == null) return null
 	return LongToDouble(vL << vI % 64n)
 }
 /**
@@ -36,8 +37,9 @@ export const sla = sll
  */
 export function srl(a: number, b: number): number | null {
 	const vL = GetVariableLong(a, false)
+	if (vL == null) return null
 	const vI = GetVariableInt(b)
-	if (vL == null || vI == null) return null
+	if (vI == null) return null
 	return LongToDouble(vL >> vI % 64n)
 }
 /**
@@ -52,8 +54,9 @@ export function srl(a: number, b: number): number | null {
  */
 export function sra(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
+	if (vL == null) return null
 	const vI = GetVariableInt(b)
-	if (vL == null || vI == null) return null
+	if (vI == null) return null
 	return LongToDouble(vL >> vI % 64n)
 }
 
@@ -68,8 +71,9 @@ export function sra(a: number, b: number): number | null {
  */
 export function and(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
+	if (vL == null) return null
 	const vI = GetVariableLong(b)
-	if (vL == null || vI == null) return null
+	if (vI == null) return null
 	return LongToDouble(vL & vI)
 }
 /**
@@ -83,8 +87,9 @@ export function and(a: number, b: number): number | null {
  */
 export function or(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
+	if (vL == null) return null
 	const vI = GetVariableLong(b)
-	if (vL == null || vI == null) return null
+	if (vI == null) return null
 	return LongToDouble(vL | vI)
 }
 /**
@@ -98,8 +103,9 @@ export function or(a: number, b: number): number | null {
  */
 export function xor(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
+	if (vL == null) return null
 	const vI = GetVariableLong(b)
-	if (vL == null || vI == null) return null
+	if (vI == null) return null
 	return LongToDouble(vL ^ vI)
 }
 /**
@@ -113,8 +119,9 @@ export function xor(a: number, b: number): number | null {
  */
 export function nor(a: number, b: number): number | null {
 	const vL = GetVariableLong(a)
+	if (vL == null) return null
 	const vI = GetVariableLong(b)
-	if (vL == null || vI == null) return null
+	if (vI == null) return null
 	return LongToDouble(~(vL | vI))
 }
 /**
@@ -131,6 +138,7 @@ export function not(a: number): number | null {
 	if (vL == null) return null
 	return LongToDouble(~vL)
 }
+
 /**
  * Returns a bit-field extracted from `a` starting at index `b` for length `c`.
  * Payload cannot exceed 53 bits in final length.
@@ -143,25 +151,23 @@ export function not(a: number): number | null {
  */
 export function ext(a: number, b: number, c: number): number | null {
 	const vStart = GetVariableInt(b)
+	if (vStart === null) return null
 	const vLen = GetVariableInt(c)
-	if (vStart === null || vLen === null) return null
+	if (vLen === null) return null
 
-	const start = Number(vStart)
-	const len = Number(vLen)
-
-	if (len <= 0) return null
-	if (start < 0) return null
-	if (start >= 53) return null
-	if (len > 53 || start + len > 53) return null
+	if (vLen <= 0n) return null
+	if (vStart < 0n) return null
+	if (vStart >= 53n) return null
+	if (vLen > 53n || vStart + vLen > 53n) return null
 
 	const vL = GetVariableLong(a, false)
 	if (vL === null) return null
 
-	const masked = vL & 0x1fffffffffffffn
+	const masked = vL & MASK53
 
-	const bitmask = BigInt(len === 53 ? 9007199254740991 : (1n << BigInt(len)) - 1n) << BigInt(start)
+	const bitmask = (vLen === 53n ? MASK53 : (1n << vLen) - 1n) << vStart
 
-	const extracted = (masked & bitmask) >> BigInt(start)
+	const extracted = (masked & bitmask) >> vStart
 
 	return LongToDouble(extracted)
 }
@@ -180,18 +186,15 @@ export function ext(a: number, b: number, c: number): number | null {
  */
 export function ins(x: number, a: number, b: number, c: number): number | null {
 	const vStart = GetVariableInt(a)
+	if (vStart === null) return null
 	const vLen = GetVariableInt(b)
-	if (vStart === null || vLen === null) return null
+	if (vLen === null) return null
 
-	const start = Number(vStart)
-	const len = Number(vLen)
+	if (vLen <= 0n) return null
+	if (vStart < 0n) return null
+	if (vStart >= 53n) return null
+	if (vLen > 53n || vStart + vLen > 53n) return null
 
-	if (len <= 0) return null
-	if (start < 0) return null
-	if (start >= 53) return null
-	if (len > 53 || start + len > 53) return null
-
-	const MASK53 = 0x1fffffffffffffn
 	const base = DoubleToLong(BigInt(x), false) & MASK53
 
 	const vValue = GetVariableLong(c, false)
@@ -199,11 +202,11 @@ export function ins(x: number, a: number, b: number, c: number): number | null {
 
 	const val = vValue & MASK53
 
-	const widthMask = len === 53 ? MASK53 : (1n << BigInt(len)) - 1n
-	const regionMask = widthMask << BigInt(start)
+	const widthMask = vLen === 53n ? MASK53 : (1n << vLen) - 1n
+	const regionMask = widthMask << vStart
 
 	const cleared = base & ~regionMask
-	const inserted = ((val & widthMask) << BigInt(start)) & regionMask
+	const inserted = ((val & widthMask) << vStart) & regionMask
 	const result = (cleared | inserted) & MASK53
 
 	return LongToDouble(result)

@@ -12,6 +12,7 @@ function crc32Table() {
 }
 
 const CRC32_TABLE = crc32Table()
+const TEXT_ENCODER = new TextEncoder()
 
 /**
  * Computes a CRC32 hash of the given string and returns it as a number.
@@ -23,7 +24,7 @@ const CRC32_TABLE = crc32Table()
  * @remarks In-game: HASH("")
  */
 export function hashString(str: string): number {
-	const bytes = new TextEncoder().encode(str)
+	const bytes = TEXT_ENCODER.encode(str)
 	let crc = 0xffffffff
 	for (let i = 0; i < bytes.length; i++) {
 		crc = CRC32_TABLE[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8)

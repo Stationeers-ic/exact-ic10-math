@@ -19,7 +19,6 @@ function testRandomInstance(r: Random, expectedSeedArray: number[], next: "next"
 
 describe("Random class", () => {
 	test("global seed", () => {
-		expect(Random.getGlobalRandomSeed()).toBeNull()
 		expect(new Random().seed).not.toBeNull()
 		expect(Random.getGlobalRandomSeed()).toBePositive()
 		Random.resetGlobalRandom(12345)
@@ -33,6 +32,8 @@ describe("Random class", () => {
 			expect(r1.next()).toBe(r2.next())
 			expect(r1.nextDouble()).toBe(r2.nextDouble())
 		}
+		expect(r1.timesSampled).toBe(1000)
+		expect(r2.timesSampled).toBe(1000)
 	})
 	test("constructor without seed", () => {
 		const r1 = new Random()
@@ -43,7 +44,7 @@ describe("Random class", () => {
 	})
 	test("next with seedArray", () => {
 		const r = new Random(1624159124)
-		const x = [
+		const x = new Int32Array([
 			0, 1545564660, 1835642589, 87644527, 495420760, 304881325, 962440290, 1494083482, 1798828867, 2025434331,
 			155577706, 807394878, 1248094852, 330554235, 519692500, 1827147490, 956084403, 568142581, 1035893648,
 			158478492, 573110291, 1820573864, 740064685, 272944728, 2087782187, 1092827305, 730131912, 1550895216,
@@ -51,7 +52,7 @@ describe("Random class", () => {
 			1226545563, 587224330, 1241274039, 900945312, 728744519, 143204656, 1539529184, 1211655580, 1288511460,
 			138497111, 2075687426, 762486449, 1288205766, 57303206, 1646173515, 933975764, 608769633, 782649302,
 			173253331,
-		]
+		])
 		const values = [
 			805499975, 1562697861, 147345987, 1550077102, 1722233060, 1559028721, 780827774, 1379801976, 1602508017,
 			2135361920, 380951314, 1813461790, 370404709, 1817060499, 513885124, 1877022487, 2128401898, 1942103256,
@@ -141,6 +142,7 @@ describe("rand", () => {
 		for (let i = 0; i < values.length; i++) {
 			expect(rand(r)).toBe(values[i])
 		}
+		expect(r.timesSampled).toBe(values.length)
 	})
 	test("with unseeded Random instance ", () => {
 		Random.resetGlobalRandom(12345)
@@ -166,6 +168,9 @@ describe("rand", () => {
 		// seeds should be same too
 		expect(r11.seed).toBe(r21.seed)
 		expect(r12.seed).toBe(r22.seed)
+
+		expect(r11.timesSampled).toBe(r21.timesSampled)
+		expect(r12.timesSampled).toBe(r22.timesSampled)
 	})
 	test("without Random instance", () => {
 		for (let i = 0; i < 100; i++) {

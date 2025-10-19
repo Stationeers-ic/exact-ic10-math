@@ -12,7 +12,7 @@
     "watch": "bun test --watch",
     "test": "bun test",
     "build": "tsc --removeComments && tsc --declaration --emitDeclarationOnly",
-    "prepack": "bun test && bun run build",
+    "prepack": "bun test && rm -R dist && bun run build",
     "updateHashes": "bun updateHashesTest.ts"
   },
   "files": [

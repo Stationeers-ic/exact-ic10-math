@@ -8,17 +8,34 @@
 >
 > ---
 >
-> [![install size](https://badgen.net/bundlephobia/minzip/exact-ic10-math) ![install size](https://badgen.net/bundlephobia/tree-shaking/exact-ic10-math) ![install size](https://badgen.net/bundlephobia/dependency-count/exact-ic10-math)](https://bundlephobia.com/package/exact-ic10-math)
+> [![bundle size](https://badgen.net/bundlephobia/minzip/exact-ic10-math) ![tree shaking](https://badgen.net/bundlephobia/tree-shaking/exact-ic10-math) ![dependency count](https://badgen.net/bundlephobia/dependency-count/exact-ic10-math)](https://bundlephobia.com/package/exact-ic10-math)
 
-A library that faithfully implements IC10 math, bitwise, and logic instructions for Stationeers as TypeScript / JavaScript functions. The core goal is to mimic the game’s IC10 instruction semantics exactly — including operand orders, bit widths, wrapping behavior, and edge-case results — and to provide clear usage instructions so the functions behave like the in-game instructions.
+A library that faithfully implements IC10 math, bitwise, and logic instructions for Stationeers as TypeScript / JavaScript functions. The core goal is to mimic the game's IC10 instruction semantics exactly — including operand orders, bit widths, wrapping behavior, and edge-case results — and to provide clear usage instructions so the functions behave like the in-game instructions.
 
-## Compatibility note
+## Features
 
-This library reproduces Stationeers' IC10 instruction semantics exactly — use it when you need faithful in-game behavior; other JS/TS libraries may differ in edge cases.
+**TL;DR** — what this library provides:
 
-## Usage examples
+-   Faithful IC10 math ops (add, sub, mul, div, pow, etc.) with in-game edge-case semantics
+-   Bitwise and field operations (and, or, xor, sll/srl, ins/extr, etc.) matching IC10 behavior
+-   CRC32 / string hashing that matches the game's hash function (`hashString`) for device names
+-   Deterministic PRNG matching the game's `Random` behavior plus convenience `rand` helpers
+-   ASCII packing helpers: `PackAscii6` and `UnpackAscii6` for packing up to 6 ASCII chars into a number
+-   ESM and named exports usable in TypeScript and Node/Browser builds
 
-Default import (quickest):
+## Installation
+
+```bash
+npm install exact-ic10-math
+# or
+bun add exact-ic10-math
+```
+
+## Usage
+
+### Default import
+
+Quickest way to get started:
 
 ```ts
 import ic10 from "exact-ic10-math"
@@ -34,7 +51,9 @@ console.log(ic10.and(5, 3)) // 1
 console.log(ic10.ins(0, 1, 2, 3)) // 6
 ```
 
-Named import (ESM / TypeScript):
+### Named imports
+
+For ESM / TypeScript projects:
 
 ```ts
 import { sll, pow, sqrt, lerp, sin, cos, seq, select } from "exact-ic10-math"
@@ -49,7 +68,9 @@ console.log(seq(1, 1)) // 1
 console.log(select(1, 42, 0)) // 42
 ```
 
-## CRC32 / String hashing
+## API Reference
+
+### String Hashing (CRC32)
 
 The library includes `hashString(str)` — a CRC32 implementation that computes a numeric hash for any string, matching the game's hashing behavior. Useful for converting device names or other string identifiers into numeric values.
 
@@ -59,22 +80,38 @@ import { hashString } from "exact-ic10-math"
 console.log(hashString("StructureAirlockGate")) // 1736080881
 ```
 
-## Random
+### ASCII Packing
 
-A small deterministic PRNG that mirrors the game's behavior.
+Helper functions for packing and unpacking short ASCII strings into numbers.
 
-Key points
+```ts
+import { PackAscii6, UnpackAscii6 } from "exact-ic10-math"
+
+console.log(PackAscii6("abc")) // 6382179
+console.log(UnpackAscii6(6382179)) // "abc"
+```
+
+**Notes:**
+
+-   `PackAscii6` packs up to 6 ASCII characters (8 bits per character) into a single number and returns that numeric value. It returns `null` for invalid inputs.
+-   `UnpackAscii6` reverses the operation and returns the original string. It accepts an optional `signed` boolean (default `true`) for completeness; in the game the `signed` flag is always `true`.
+
+### Random Number Generation
+
+A deterministic PRNG that mirrors the game's behavior.
+
+**Key API:**
 
 -   `new Random(seed?)` — create a generator; if omitted a seed is generated for you and available as `instance.seed`.
 -   `rand(random?)` — convenience wrapper. Pass a `Random` instance to use its `nextDouble()`; calling `rand()` with no argument uses the internal global RNG. Prefer passing your own instance for independent or reproducible streams.
 -   `Random.resetGlobalRandom(seed?)` — reseed (provide a `seed`) or clear (no args) the internal global RNG.
 -   `Random.getGlobalRandomSeed()` — read the currently-set global seed (or `null` if none).
 
-Why this matters
+**Why this matters:**
 
 Create a separate `Random` instance for each in-game code line (or logical RNG stream) to reproduce the game's behavior and avoid accidental sequence coupling.
 
-Example
+**Example:**
 
 ```ts
 import { Random, rand } from "exact-ic10-math"
@@ -92,16 +129,16 @@ console.log(rngLineB.seed)
 // const rngDet = new Random(12345)
 ```
 
-Notes
+**Notes:**
 
 -   Tests validate specific integer sequences and floating outputs to ensure reproducible values across platforms.
 -   For fully reproducible runs, keep and use your own `Random` instances rather than relying on the global RNG.
 
-Replaying runs / capturing seeds
+#### Replaying Runs / Capturing Seeds
 
-Two simple approaches:
+Two approaches for reproducible random sequences:
 
--   Seed the global generator to replay a whole run. Set and record a global seed before creating generators so the sequence of instance seeds is repeatable:
+**1. Global seed approach** — Replay entire run by seeding the global generator:
 
 ```ts
 import { Random } from "exact-ic10-math"
@@ -124,7 +161,7 @@ const b2 = new Random()
 // rand(b) === rand(b2)
 ```
 
--   Capture an individual instance seed and recreate that instance later:
+**2. Instance seed approach** — Capture and replay individual generator:
 
 ```ts
 const r = new Random()
@@ -134,4 +171,8 @@ console.log(r.seed) // store this value
 const rReplay = new Random(r.seed)
 ```
 
-Use the global-seed approach when you want to reproduce the full set of generated instance seeds; use the instance-seed approach when you only need to replay a single generator.
+**Use the global-seed approach** when you want to reproduce the full set of generated instance seeds; **use the instance-seed approach** when you only need to replay a single generator.
+
+## Compatibility Note
+
+This library reproduces Stationeers' IC10 instruction semantics exactly — use it when you need faithful in-game behavior; other JS/TS libraries may differ in edge cases.

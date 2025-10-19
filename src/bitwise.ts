@@ -1,7 +1,7 @@
 import { GetVariableInt, GetVariableLong, LongToDouble, DoubleToLong } from "./functions"
 
 /**
- * Returns the result of logically left-shifting the 64-bit value in `a` by `b` bits.
+ * Returns the result of logically left-shifting.
  *
  * @example
  * ```ts
@@ -26,7 +26,7 @@ export function sll(a: number, b: number): number | null {
  */
 export const sla = sll
 /**
- * Returns the result of logically (unsigned) right-shifting the 64-bit value in `a` by `b` bits.
+ * Returns the result of logically (unsigned) right-shifting.
  *
  * @example
  * ```ts
@@ -41,7 +41,7 @@ export function srl(a: number, b: number): number | null {
 	return LongToDouble(vL >> vI % 64n)
 }
 /**
- * Returns the result of arithmetically (signed) right-shifting the 64-bit value in `a` by `b` bits.
+ * Returns the result of arithmetically (signed) right-shifting.
  * Preserves the sign bit.
  *
  * @example
@@ -58,7 +58,7 @@ export function sra(a: number, b: number): number | null {
 }
 
 /**
- * Returns the bitwise AND of `a` and `b` (operating on 64-bit values).
+ * Returns the bitwise AND of `a` and `b`.
  *
  * @example
  * ```ts
@@ -73,7 +73,7 @@ export function and(a: number, b: number): number | null {
 	return LongToDouble(vL & vI)
 }
 /**
- * Returns the bitwise OR of `a` and `b` (operating on 64-bit values).
+ * Returns the bitwise OR of `a` and `b`.
  *
  * @example
  * ```ts
@@ -88,7 +88,7 @@ export function or(a: number, b: number): number | null {
 	return LongToDouble(vL | vI)
 }
 /**
- * Returns the bitwise XOR of `a` and `b` (operating on 64-bit values).
+ * Returns the bitwise XOR of `a` and `b`.
  *
  * @example
  * ```ts
@@ -103,7 +103,7 @@ export function xor(a: number, b: number): number | null {
 	return LongToDouble(vL ^ vI)
 }
 /**
- * Returns the bitwise NOR of `a` and `b` (operating on 64-bit values).
+ * Returns the bitwise NOR of `a` and `b`.
  *
  * @example
  * ```ts
@@ -118,7 +118,7 @@ export function nor(a: number, b: number): number | null {
 	return LongToDouble(~(vL | vI))
 }
 /**
- * Returns the bitwise NOT (complement) of `a` (operating on 64-bit values).
+ * Returns the bitwise NOT (complement) of `a`.
  *
  * @example
  * ```ts
@@ -142,10 +142,9 @@ export function not(a: number): number | null {
  * @remarks In-game: ext r? a(r?|num) b(r?|num) c(r?|num)
  */
 export function ext(a: number, b: number, c: number): number | null {
-	const vL = GetVariableLong(a, false)
 	const vStart = GetVariableInt(b)
 	const vLen = GetVariableInt(c)
-	if (vL == null || vStart == null || vLen == null) return null
+	if (vStart === null || vLen === null) return null
 
 	const start = Number(vStart)
 	const len = Number(vLen)
@@ -154,6 +153,9 @@ export function ext(a: number, b: number, c: number): number | null {
 	if (start < 0) return null
 	if (start >= 53) return null
 	if (len > 53 || start + len > 53) return null
+
+	const vL = GetVariableLong(a, false)
+	if (vL === null) return null
 
 	const masked = vL & 0x1fffffffffffffn
 
@@ -179,9 +181,7 @@ export function ext(a: number, b: number, c: number): number | null {
 export function ins(x: number, a: number, b: number, c: number): number | null {
 	const vStart = GetVariableInt(a)
 	const vLen = GetVariableInt(b)
-	const vValue = GetVariableLong(c, false)
-
-	if (vStart == null || vLen == null || vValue == null) return null
+	if (vStart === null || vLen === null) return null
 
 	const start = Number(vStart)
 	const len = Number(vLen)
@@ -193,6 +193,10 @@ export function ins(x: number, a: number, b: number, c: number): number | null {
 
 	const MASK53 = 0x1fffffffffffffn
 	const base = DoubleToLong(BigInt(x), false) & MASK53
+
+	const vValue = GetVariableLong(c, false)
+	if (vValue === null) return null
+
 	const val = vValue & MASK53
 
 	const widthMask = len === 53 ? MASK53 : (1n << BigInt(len)) - 1n

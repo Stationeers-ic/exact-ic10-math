@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { sin, cos, tan, acos, asin, atan, atan2 } from "../tigonometry"
+import { sin, cos, tan, acos, asin, atan, atan2 } from "../trigonometry"
 
 describe("math", () => {
 	test("sin", () => {

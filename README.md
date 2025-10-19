@@ -176,3 +176,4 @@ const rReplay = new Random(r.seed)
 ## Compatibility Note
 
 This library reproduces Stationeers' IC10 instruction semantics exactly — use it when you need faithful in-game behavior; other JS/TS libraries may differ in edge cases.
+Based on Stationeers v0.2.5954.26176 (16.10.2025)

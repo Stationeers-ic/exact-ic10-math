@@ -35,7 +35,9 @@ export function floor(a: number): number {
  * @remarks In-game: round r? a(r?|num)
  */
 export function round(a: number): number {
-	if (a % 2 === 0.5 || a % 2 === -1.5) {
+	// round to nearest even
+	const mod = a % 2
+	if (mod % 2 === 0.5 || mod % 2 === -1.5) {
 		return floor(a)
 	}
 	return Math.round(a)

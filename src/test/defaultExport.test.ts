@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test"
 import Default from "../index"
 import * as bitwise from "../bitwise"
 import * as math from "../math"
-import * as trigonometry from "../tigonometry"
+import * as trigonometry from "../trigonometry"
 import * as comparison from "../comparison"
 import * as rounding from "../rounding"
 import { rand } from "../rand"
@@ -56,7 +56,7 @@ describe("default export", () => {
 		// @ts-ignore
 		expect(Default.rand).toBe(rand)
 	})
-	test("doen't contain other", () => {
+	test("doesn't contain other", () => {
 		const all = { ...bitwise, ...math, ...trigonometry, ...comparison, ...rounding, rand }
 		for (const key in Default) {
 			expect(all).toHaveProperty(key)

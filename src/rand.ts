@@ -13,10 +13,10 @@
  * ```
  * @remarks In-game: rand r? a(r?|num)
  */
-function rand(random: Random): number
+function rand(rng: Random): number
 function rand(): number
-function rand(random?: Random): number {
-	if (random !== undefined) return random.nextDouble()
+function rand(rng?: Random): number {
+	if (rng !== undefined) return rng.nextDouble()
 	return Math.random()
 }
 export { rand }

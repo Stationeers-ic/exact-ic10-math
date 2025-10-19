@@ -1,7 +1,7 @@
 export * from "./functions"
 export * from "./bitwise"
 export * from "./math"
-export * from "./tigonometry"
+export * from "./trigonometry"
 export * from "./comparison"
 export * from "./rounding"
 export * from "./rand"
@@ -12,7 +12,7 @@ export { PackAscii6, UnpackAscii6 } from "./ascii"
 // Default export containing all functions
 import { sll, sla, srl, sra, and, or, xor, nor, not, ext, ins } from "./bitwise"
 import { abs, add, sub, mul, div, mod, pow, sqrt, log, exp, min, max, lerp, move } from "./math"
-import { sin, cos, tan, acos, asin, atan, atan2 } from "./tigonometry"
+import { sin, cos, tan, acos, asin, atan, atan2 } from "./trigonometry"
 import {
 	seq,
 	sne,

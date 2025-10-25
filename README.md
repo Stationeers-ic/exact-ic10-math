@@ -1,6 +1,6 @@
-> # exact-ic10-math
+> # @stationeers-ic/exact-ic10-math
 >
-> [![bundle size](https://badgen.net/bundlephobia/minzip/exact-ic10-math) ![tree shaking](https://badgen.net/bundlephobia/tree-shaking/exact-ic10-math) ![dependency count](https://badgen.net/bundlephobia/dependency-count/exact-ic10-math)](https://bundlephobia.com/package/exact-ic10-math)
+> [![bundle size](https://badgen.net/bundlephobia/minzip/@stationeers-ic/exact-ic10-math) ![tree shaking](https://badgen.net/bundlephobia/tree-shaking/@stationeers-ic/exact-ic10-math) ![dependency count](https://badgen.net/bundlephobia/dependency-count/@stationeers-ic/exact-ic10-math)](https://bundlephobia.com/package/@stationeers-ic/exact-ic10-math)
 
 A library that faithfully implements IC10 math, bitwise, and logic instructions for Stationeers as TypeScript / JavaScript functions. The core goal is to mimic the game's IC10 instruction semantics exactly — including operand orders, bit widths, wrapping behavior, and edge-case results — and to provide clear usage instructions so the functions behave like the in-game instructions.
 
@@ -18,9 +18,9 @@ A library that faithfully implements IC10 math, bitwise, and logic instructions 
 ## Installation
 
 ```bash
-npm install exact-ic10-math
+npm install @stationeers-ic/exact-ic10-math
 # or
-bun add exact-ic10-math
+bun add @stationeers-ic/exact-ic10-math
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ bun add exact-ic10-math
 Quickest way to get started:
 
 ```ts
-import ic10 from "exact-ic10-math"
+import ic10 from "@stationeers-ic/exact-ic10-math"
 
 // basic math
 console.log(ic10.add(2, 3)) // 5
@@ -49,7 +49,7 @@ For ESM / TypeScript projects:
 Better for tree-shaking.
 
 ```ts
-import { sll, pow, sqrt, lerp, sin, cos, seq, select } from "exact-ic10-math"
+import { sll, pow, sqrt, lerp, sin, cos, seq, select } from "@stationeers-ic/exact-ic10-math"
 
 console.log(sll(1, 2)) // 4
 console.log(pow(2, 3)) // 8
@@ -68,7 +68,7 @@ console.log(select(1, 42, 0)) // 42
 The library includes `hashString(str)` — a CRC32 implementation that computes a numeric hash for any string, matching the game's hashing behavior. Useful for converting device names or other string identifiers into numeric values.
 
 ```ts
-import { hashString } from "exact-ic10-math"
+import { hashString } from "@stationeers-ic/exact-ic10-math"
 
 console.log(hashString("StructureAirlockGate")) // 1736080881
 ```
@@ -78,7 +78,7 @@ console.log(hashString("StructureAirlockGate")) // 1736080881
 Helper functions for packing and unpacking short ASCII strings into numbers.
 
 ```ts
-import { PackAscii6, UnpackAscii6 } from "exact-ic10-math"
+import { PackAscii6, UnpackAscii6 } from "@stationeers-ic/exact-ic10-math"
 
 console.log(PackAscii6("abc")) // 6382179
 console.log(UnpackAscii6(6382179)) // "abc"
@@ -107,7 +107,7 @@ Create a separate `Random` instance for each in-game code line (or logical RNG s
 **Example:**
 
 ```ts
-import { Random, rand } from "exact-ic10-math"
+import { Random, rand } from "@stationeers-ic/exact-ic10-math"
 
 const rngLineA = new Random()
 const rngLineB = new Random()
@@ -134,7 +134,7 @@ Two approaches for reproducible random sequences:
 **1. Global seed approach** — Replay entire run by seeding the global generator:
 
 ```ts
-import { Random } from "exact-ic10-math"
+import { Random } from "@stationeers-ic/exact-ic10-math"
 
 // choose and record this seed for replay
 Random.resetGlobalRandom(111098293)

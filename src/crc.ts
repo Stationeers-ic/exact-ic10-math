@@ -23,11 +23,30 @@ const TEXT_ENCODER = new TextEncoder()
  * ```
  * @remarks In-game: HASH("")
  */
-export function hashString(str: string): number {
-	const bytes = TEXT_ENCODER.encode(str)
+export function hashString(string: string | Uint8Array): number {
+	const bytes = typeof string === "string" ? TEXT_ENCODER.encode(string) : string
 	let crc = 0xffffffff
 	for (let i = 0; i < bytes.length; i++) {
 		crc = CRC32_TABLE[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8)
+	}
+	return crc ^ 0xffffffff
+}
+
+/**
+ * Computes a CRC32 hash of the data from the given ReadableStream and returns it as a number.
+ */
+export async function hashStream(stream: ReadableStream<Uint8Array | string>): Promise<number> {
+	const reader = stream.getReader()
+	let crc = 0xffffffff
+
+	while (true) {
+		const { done, value: chunk } = await reader.read()
+		if (done) break
+
+		const bytes: Uint8Array = typeof chunk === "string" ? TEXT_ENCODER.encode(chunk) : chunk
+		for (let i = 0; i < bytes.length; i++) {
+			crc = CRC32_TABLE[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8)
+		}
 	}
 	return crc ^ 0xffffffff
 }

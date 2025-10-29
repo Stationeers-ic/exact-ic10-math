@@ -1,4 +1,4 @@
-export * from "./functions"
+export { DoubleToLong, GetVariableInt, GetVariableLong, LongToDouble } from "./functions"
 export * from "./bitwise"
 export * from "./math"
 export * from "./trigonometry"
@@ -6,7 +6,7 @@ export * from "./comparison"
 export * from "./rounding"
 export * from "./rand"
 export { float_epsilon, type BooleanLikeResult } from "./const"
-export { hashString } from "./crc"
+export { hashString, hashStream } from "./crc"
 export { PackAscii6, UnpackAscii6 } from "./ascii"
 
 // Default export containing all functions

@@ -135,6 +135,7 @@ out
 .project-manager/
 build/
 dist/
+dist-temp/
 
 src/**/*.js
 todo.todo.json

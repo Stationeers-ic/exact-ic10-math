@@ -2,7 +2,7 @@
   "author": "Aidan647",
   "name": "@stationeers-ic/exact-ic10-math",
   "description": "A library that faithfully implements IC10 math, bitwise, and logic instructions with exact behavior.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publishConfig": {
     "access": "public"
   },
